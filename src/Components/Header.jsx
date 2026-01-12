@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 function Header() {
   const [openCurrency, setOpenCurrency] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMagnifyOpen, setIsMagnifyOpen] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,7 +126,7 @@ function Header() {
 
             <div className="flex items-end gap-2">
 
-              <button className="hover:text-red-600">
+              <button className="hover:text-red-600" onClick={() => setIsMagnifyOpen(true)}>
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
 
@@ -131,12 +134,14 @@ function Header() {
                 <i class="fa-regular fa-user"></i>
               </button>
 
-              <button className="relative hover:text-red-600">
-                <i class="fa-regular fa-heart"></i>
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
-              </button>
+              <Link to="/Wishlist">
+                <button className="relative hover:text-red-600">
+                  <i class="fa-regular fa-heart"></i>
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                </button>
+              </Link>
 
-              <button className="relative hover:text-red-600">
+              <button className="relative hover:text-red-600" onClick={() => setIsCartOpen(true)}>
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
               </button>
@@ -160,6 +165,153 @@ function Header() {
           </div>
         </div>
       </header>
+
+      {/* ================= CART SIDEBAR ================= */}
+      <div className={`fixed inset-0 z-[999] ${isCartOpen ? "visible" : "invisible"}`}>
+
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black/40 transition-opacity ${isCartOpen ? "opacity-100" : "opacity-0"}`}
+          onClick={() => setIsCartOpen(false)}
+        ></div>
+
+        {/* Sidebar */}
+        <div className={`absolute right-0 top-0 h-full w-full sm:w-[500px] bg-white shadow-xl transform transition-transform duration-300 ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
+
+          {/* Header */}
+          <div className="flex justify-between items-center p-4 border-b">
+            <h3 className="font-semibold text-lg">Shopping cart</h3>
+            <button onClick={() => setIsCartOpen(false)} className="text-xl">✕</button>
+          </div>
+
+          {/* Free Shipping Bar */}
+          <div className="p-4 border-b">
+            <div className="w-full h-2 bg-gray-200 rounded">
+              <div className="w-[60%] h-2 bg-red-500 rounded"></div>
+            </div>
+            <p className="text-sm mt-2">
+              Buy <b>$75.00</b> more to enjoy <b>Free Shipping</b>
+            </p>
+          </div>
+
+          {/* Suggestion */}
+          <div className="p-4">
+            <h4 className="font-semibold mb-3">You may also like</h4>
+
+            <div className="flex gap-3 items-center border p-3 rounded-lg">
+              <img src="/images/product1.jpg" className="w-20 h-24 object-cover rounded" />
+              <div className="flex-1">
+                <p className="font-medium">Loose Fit Hoodie</p>
+                <p className="font-semibold">$25.00</p>
+              </div>
+              <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="absolute bottom-0 left-0 w-full border-t p-4 bg-white">
+
+            <div className="flex justify-between mb-3">
+              <span className="font-medium">Subtotal</span>
+              <span className="font-bold">$49.99 USD</span>
+            </div>
+
+            <p className="text-sm text-gray-500 mb-3">
+              Taxes and shipping calculated at checkout
+            </p>
+
+            <div className="flex items-center gap-2 mb-4">
+              <input type="checkbox" checked />
+              <span className="text-sm">
+                I agree with the <u>terms and conditions</u>
+              </span>
+            </div>
+
+            <div className="flex gap-3">
+              <button className="flex-1 border py-3 rounded">View cart</button>
+              <button className="flex-1 bg-black text-white py-3 rounded">Check out</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      {/* ================= END CART SIDEBAR ================= */}
+      
+      {/* ================= SEARCH SIDEBAR ================= */}
+      <div className={`fixed inset-0 z-[999] ${isMagnifyOpen ? "visible" : "invisible"}`}>
+
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black/40 transition-opacity ${isMagnifyOpen ? "opacity-100" : "opacity-0"}`}
+          onClick={() => setIsMagnifyOpen(false)}
+        ></div>
+
+        {/* Sidebar */}
+        <div className={`absolute right-0 top-0 h-full w-full sm:w-[500px] bg-white shadow-xl transform transition-transform duration-300 ${isMagnifyOpen ? "translate-x-0" : "translate-x-full"}`}>
+          {/* Header */}
+          <div className="flex justify-between items-center p-4 border-b">
+            <h3 className="font-semibold text-lg">Shopping cart</h3>
+            <button onClick={() => setIsMagnifyOpen(false)} className="text-xl">✕</button>
+          </div>
+
+          {/* Free Shipping Bar */}
+          <div className="p-4 border-b">
+            <div className="w-full h-2 bg-gray-200 rounded">
+              <div className="w-[60%] h-2 bg-red-500 rounded"></div>
+            </div>
+            <p className="text-sm mt-2">
+              Buy <b>$75.00</b> more to enjoy <b>Free Shipping</b>
+            </p>
+          </div>
+
+          {/* Suggestion */}
+          <div className="p-4">
+            <h4 className="font-semibold mb-3">You may also like</h4>
+
+            <div className="flex gap-3 items-center border p-3 rounded-lg">
+              <img src="/images/product1.jpg" className="w-20 h-24 object-cover rounded" />
+              <div className="flex-1">
+                <p className="font-medium">Loose Fit Hoodie</p>
+                <p className="font-semibold">$25.00</p>
+              </div>
+              <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="absolute bottom-0 left-0 w-full border-t p-4 bg-white">
+
+            <div className="flex justify-between mb-3">
+              <span className="font-medium">Subtotal</span>
+              <span className="font-bold">$49.99 USD</span>
+            </div>
+
+            <p className="text-sm text-gray-500 mb-3">
+              Taxes and shipping calculated at checkout
+            </p>
+
+            <div className="flex items-center gap-2 mb-4">
+              <input type="checkbox" checked />
+              <span className="text-sm">
+                I agree with the <u>terms and conditions</u>
+              </span>
+            </div>
+
+            <div className="flex gap-3">
+              <button className="flex-1 border py-3 rounded">View cart</button>
+              <button className="flex-1 bg-black text-white py-3 rounded">Check out</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      {/* ================= END SEARCH SIDEBAR ================= */}
     </>
   );
 }
