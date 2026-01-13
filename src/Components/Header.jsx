@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
+import Wishlist from "../Pages/Wishlist";
 
-function Header() {
+function Header({ wishlistCount, cart, setCart }) {
   const [openCurrency, setOpenCurrency] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -19,6 +20,12 @@ function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
 
   return (
     <>
@@ -107,7 +114,7 @@ function Header() {
       </div>
 
       {/* NAVBAR */}
-      <header className="w-full relative bg-white top-0 z-50">
+      <header className="w-full relative bg-white top-0 z-50" >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-20">
 
@@ -116,11 +123,11 @@ function Header() {
             </div>
 
             <nav className="hidden lg:flex items-center gap-8 font-medium">
-              <Link to="/" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Home <i class="fa-solid fa-angle-down"></i></Link>
-              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Shop <i class="fa-solid fa-angle-down"></i></Link>
-              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Products <i class="fa-solid fa-angle-down"></i></Link>
-              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Pages <i class="fa-solid fa-angle-down"></i></Link>
-              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Blog <i class="fa-solid fa-angle-down"></i></Link>
+              <Link to="/" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Home <i className="fa-solid fa-angle-down"></i></Link>
+              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Shop <i className="fa-solid fa-angle-down"></i></Link>
+              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Products <i className="fa-solid fa-angle-down"></i></Link>
+              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Pages <i className="fa-solid fa-angle-down"></i></Link>
+              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Blog <i className="fa-solid fa-angle-down"></i></Link>
               <Link to="" className="hover:text-red-600 text-black no-underline hover:border-b-2 hover:border-black">Buy now</Link>
             </nav>
 
@@ -134,16 +141,22 @@ function Header() {
                 <i class="fa-regular fa-user"></i>
               </button>
 
-              <Link to="/Wishlist">
+              <Link to="/wishlist">
                 <button className="relative hover:text-red-600">
-                  <i class="fa-regular fa-heart"></i>
-                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                  <i class="fa-regular fa-heart text-dark"></i>
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                      {wishlistCount}
+                    </span>
+                  )}
                 </button>
               </Link>
 
               <button className="relative hover:text-red-600" onClick={() => setIsCartOpen(true)}>
                 <i class="fa-solid fa-bag-shopping"></i>
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">0</span>
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cart.length}
+                </span>
               </button>
 
               <button id="menuBtn" className="lg:hidden text-2xl">
@@ -167,79 +180,140 @@ function Header() {
       </header>
 
       {/* ================= CART SIDEBAR ================= */}
-      <div className={`fixed inset-0 z-[999] ${isCartOpen ? "visible" : "invisible"}`}>
-
-        {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-[999] ${isCartOpen ? "visible" : "invisible"
+          }`}
+      >
         <div
-          className={`absolute inset-0 bg-black/40 transition-opacity ${isCartOpen ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 bg-black/40 transition-opacity ${isCartOpen ? "opacity-100" : "opacity-0"
+            }`}
           onClick={() => setIsCartOpen(false)}
         ></div>
 
-        {/* Sidebar */}
-        <div className={`absolute right-0 top-0 h-full w-full sm:w-[500px] bg-white shadow-xl transform transition-transform duration-300 ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
-
+        <div
+          className={`absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-xl transform transition-transform duration-300 ${isCartOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+        >
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b">
             <h3 className="font-semibold text-lg">Shopping cart</h3>
-            <button onClick={() => setIsCartOpen(false)} className="text-xl">✕</button>
+            <button onClick={() => setIsCartOpen(false)} className="text-xl">
+              <i className="bi bi-x"></i>
+            </button>
           </div>
 
-          {/* Free Shipping Bar */}
+          {/* Free Shipping */}
           <div className="p-4 border-b">
             <div className="w-full h-2 bg-gray-200 rounded">
-              <div className="w-[60%] h-2 bg-red-500 rounded"></div>
+              <div
+                className="h-2 bg-red-500 rounded"
+                style={{
+                  width: `${Math.min((subtotal / 75) * 100, 100)}%`,
+                }}
+              ></div>
             </div>
             <p className="text-sm mt-2">
               Buy <b>$75.00</b> more to enjoy <b>Free Shipping</b>
             </p>
           </div>
 
-          {/* Suggestion */}
-          <div className="p-4">
-            <h4 className="font-semibold mb-3">You may also like</h4>
+          {/* CART ITEMS */}
+          <div className="p-4 overflow-y-auto flex-1">
+            {cart.length === 0 ? (
+              <p className="text-center text-gray-400">Your cart is empty</p>
+            ) : (
+              cart.map((item) => (
+                <div
+                  key={item.id}
+                  className="flex gap-4 mb-4 border-b pb-4"
+                >
+                  <img
+                    src={item.img1}
+                    className="w-20 h-24 object-cover rounded"
+                    alt=""
+                  />
 
-            <div className="flex gap-3 items-center border p-3 rounded-lg">
-              <img src="/images/product1.jpg" className="w-20 h-24 object-cover rounded" />
-              <div className="flex-1">
-                <p className="font-medium">Loose Fit Hoodie</p>
-                <p className="font-semibold">$25.00</p>
-              </div>
-              <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
-                <i class="bi bi-eye"></i>
-              </button>
-            </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium">{item.name}</h4>
+                    <p className="font-semibold">${item.price}</p>
+
+                    <div className="flex items-center gap-4 mt-2">
+                      <div className="flex items-center border">
+                        <button
+                          className="px-2 py-1"
+                          onClick={() =>
+                            setCart((prev) =>
+                              prev.map((p) =>
+                                p.id === item.id
+                                  ? { ...p, qty: Math.max(1, p.qty - 1) }
+                                  : p
+                              )
+                            )
+                          }
+                        >
+                          -
+                        </button>
+
+                        <span className="px-3">{item.qty}</span>
+
+                        <button
+                          className="px-2 py-1"
+                          onClick={() =>
+                            setCart((prev) =>
+                              prev.map((p) =>
+                                p.id === item.id
+                                  ? { ...p, qty: p.qty + 1 }
+                                  : p
+                              )
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <button
+                        className="text-sm underline text-gray-500"
+                        onClick={() =>
+                          setCart((prev) =>
+                            prev.filter((p) => p.id !== item.id)
+                          )
+                        }
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
 
-          {/* Bottom Section */}
-          <div className="absolute bottom-0 left-0 w-full border-t p-4 bg-white">
-
+          {/* Bottom */}
+          <div className="border-t p-4">
             <div className="flex justify-between mb-3">
               <span className="font-medium">Subtotal</span>
-              <span className="font-bold">$49.99 USD</span>
+              <span className="font-bold">${subtotal.toFixed(2)} USD</span>
             </div>
 
             <p className="text-sm text-gray-500 mb-3">
               Taxes and shipping calculated at checkout
             </p>
 
-            <div className="flex items-center gap-2 mb-4">
-              <input type="checkbox" checked />
-              <span className="text-sm">
-                I agree with the <u>terms and conditions</u>
-              </span>
-            </div>
-
             <div className="flex gap-3">
-              <button className="flex-1 border py-3 rounded">View cart</button>
-              <button className="flex-1 bg-black text-white py-3 rounded">Check out</button>
+              <button className="flex-1 border py-3 rounded">
+                <Link to="/" className="no-underline text-black">View cart</Link>
+              </button>
+              <button className="flex-1 bg-black text-white py-3 rounded">
+                Check out
+              </button>
             </div>
-
           </div>
-
         </div>
       </div>
+
       {/* ================= END CART SIDEBAR ================= */}
-      
+
       {/* ================= SEARCH SIDEBAR ================= */}
       <div className={`fixed inset-0 z-[999] ${isMagnifyOpen ? "visible" : "invisible"}`}>
 

@@ -12,7 +12,7 @@ import gram5 from "../assets/images/gallery-8.jpg";
 
 
 
-function Home() {
+function Home({ toggleWishlist, isInWishlist, addToCart }) {
   const swiperRef = useRef(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -175,19 +175,23 @@ function Home() {
                 <div className="product-img">
                   <img src={p.img1} className="img-1" alt="" />
                   <img src={p.img2} className="img-2" alt="" />
+
                   {/* ACTIONS */}
                   <div className="product-actions">
-                    <div className="action-btn">
+                    <div className="action-btn" onClick={() => addToCart(p)}>
                       <i class="fa-solid fa-cart-plus"></i>
                     </div>
-                    <div className="action-btn">
-                      <i class="fa-regular fa-heart"></i>
+
+                    <div className="action-btn" onClick={() => toggleWishlist(p)}>
+                      <i className={`fa-heart ${ isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
                     </div>
+
                     <div className="action-btn">
-                      <i class="fa-solid fa-code-compare"></i>
+                      <i className="fa-solid fa-code-compare"></i>
                     </div>
+
                     <div className="action-btn">
-                      <i class="fa-regular fa-eye"></i>
+                      <i className="fa-regular fa-eye"></i>
                     </div>
                   </div>
                 </div>
@@ -199,11 +203,7 @@ function Home() {
               {/* COLORS */}
               <div className="d-flex gap-2">
                 {p.colors.map((c, i) => (
-                  <span
-                    key={i}
-                    className="color-dot"
-                    style={{ background: c }}
-                  ></span>
+                  <span key={i} className="color-dot" style={{ background: c }}></span>
                 ))}
               </div>
             </div>
