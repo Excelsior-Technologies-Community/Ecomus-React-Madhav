@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -21,6 +22,9 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
   const togglePopup = (id) => {
     setActivePopup(activePopup === id ? null : id);
   }
+
+  const navigate = useNavigate();
+
 
   return (
     <>
@@ -149,11 +153,12 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 Discovery all new items
               </h2>
 
-              <div className="discover-btn">
+              <div className="discover-btn" onClick={() => navigate("/collection")} style={{ cursor: "pointer" }}>
                 ↗
               </div>
             </div>
           </div>
+
 
         </div>
       </div>
@@ -183,7 +188,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                     </div>
 
                     <div className="action-btn" onClick={() => toggleWishlist(p)}>
-                      <i className={`fa-heart ${ isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
+                      <i className={`fa-heart ${isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
                     </div>
 
                     <div className="action-btn">

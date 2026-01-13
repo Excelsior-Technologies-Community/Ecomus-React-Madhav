@@ -94,8 +94,12 @@ function App() {
               addToCart={addToCart}
             />
           }
-        />
+          />
+
+          <Route path="/collection" element={<Collection />}/>
       </Routes>
+
+
 
       <Footer />
     </BrowserRouter>
