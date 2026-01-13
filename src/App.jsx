@@ -3,6 +3,7 @@ import Header from './Components/Header.jsx';
 import Footer from './Components/Footer.jsx';
 import Home from './Pages/Home.jsx';
 import Wishlist from './Pages/Wishlist.jsx';
+import Collection from './Pages/Collection.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
