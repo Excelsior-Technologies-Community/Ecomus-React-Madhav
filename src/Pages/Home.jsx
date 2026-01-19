@@ -184,7 +184,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                   {/* ACTIONS */}
                   <div className="product-actions">
                     <div className="action-btn" onClick={() => addToCart(p)}>
-                      <i class="fa-solid fa-cart-plus"></i>
+                      <i className="fa-solid fa-cart-plus"></i>
                     </div>
 
                     <div className="action-btn" onClick={() => toggleWishlist(p)}>
@@ -315,11 +315,11 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
         <div className="position-relative">
           {/* Nav Buttons */}
           <button className="happy-prev btn btn-outline-dark rounded-circle position-absolute top-50 start-[-25px] translate-middle-y z-3 font-semibold">
-            <i class="bi bi-chevron-compact-left"></i>
+            <i className="bi bi-chevron-compact-left"></i>
           </button>
 
           <button className="happy-next btn btn-outline-dark rounded-circle position-absolute top-50 end-[-25px] translate-middle-y z-3">
-            <i class="bi bi-chevron-compact-right"></i>
+            <i className="bi bi-chevron-compact-right"></i>
           </button>
 
 
@@ -516,7 +516,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 {/* Overlay Button */}
                 <div className="gram-overlay d-flex align-items-center justify-content-center">
                   <button className="btn btn-light rounded-circle shadow">
-                    <i class="bi bi-bag-plus"></i>
+                    <i className="bi bi-bag-plus"></i>
                   </button>
                 </div>
               </div>
@@ -535,7 +535,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           <div className="col-12 col-sm-6 col-lg-3">
             <div className="border rounded-4 p-4 h-100 text-center feature-card">
               <div className="mb-3 fs-1">
-                <i class="bi bi-box"></i>
+                <i className="bi bi-box"></i>
               </div>
               <h5 className="fw-semibold">Free Shipping</h5>
               <p className="text-muted mb-0">Free shipping over order $120</p>
@@ -546,7 +546,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           <div className="col-12 col-sm-6 col-lg-3">
             <div className="border rounded-4 p-4 h-100 text-center feature-card">
               <div className="mb-3 fs-1">
-                <i class="bi bi-credit-card"></i>
+                <i className="bi bi-credit-card"></i>
               </div>
               <h5 className="fw-semibold">Flexible Payment</h5>
               <p className="text-muted mb-0">Pay with Multiple Credit Cards</p>
@@ -557,7 +557,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           <div className="col-12 col-sm-6 col-lg-3">
             <div className="border rounded-4 p-4 h-100 text-center feature-card">
               <div className="mb-3 fs-1">
-                <i class="bi bi-arrow-return-left"></i>
+                <i className="bi bi-arrow-return-left"></i>
               </div>
               <h5 className="fw-semibold">14 Day Returns</h5>
               <p className="text-muted mb-0">Within 30 days for an exchange</p>
@@ -568,7 +568,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           <div className="col-12 col-sm-6 col-lg-3">
             <div className="border rounded-4 p-4 h-100 text-center feature-card">
               <div className="mb-3 fs-1">
-                <i class="bi bi-headset"></i>
+                <i className="bi bi-headset"></i>
               </div>
               <h5 className="fw-semibold">Premium Support</h5>
               <p className="text-muted mb-0">Outstanding premium support</p>

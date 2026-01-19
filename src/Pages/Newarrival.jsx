@@ -1,22 +1,27 @@
 import React, { useState } from "react";
+import Products from '../Data/Product';
 
 export default function Newarrival() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeGrid, setActiveGrid] = useState(4);
 
   // ================= PRODUCTS =================
-  const allProducts = [
-    { id: 1, name: "Red Dress", category: "Fashion", price: 120, inStock: true },
-    { id: 2, name: "Blue Jeans", category: "Denim", price: 180, inStock: true },
-    { id: 3, name: "Men Shirt", category: "Men", price: 90, inStock: true },
-    { id: 4, name: "Women Top", category: "Women", price: 250, inStock: true },
-    { id: 5, name: "Dress Gown", category: "Dress", price: 320, inStock: false },
-    { id: 6, name: "Denim Jacket", category: "Denim", price: 200, inStock: false },
-    { id: 7, name: "Fashion Skirt", category: "Fashion", price: 150, inStock: true },
-    { id: 8, name: "Men Shoes", category: "Men", price: 280, inStock: true },
-  ];
+  const [wishlistItems, setWishlistItems] = useState(
+    JSON.parse(localStorage.getItem("wishlistItems")) || []
+  );
 
-  const [products, setProducts] = useState(allProducts);
+  const toggleWishlist = (product) => {
+    let updated;
+    if (wishlistItems.some(i => i.id === product.id)) {
+      updated = wishlistItems.filter(i => i.id !== product.id);
+    } else {
+      updated = [...wishlistItems, product];
+    }
+    setWishlistItems(updated);
+    localStorage.setItem("wishlistItems", JSON.stringify(updated));
+  };
+
+  const [products, setProducts] = useState(Products);
 
   // ================= FILTER STATES =================
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -35,7 +40,7 @@ export default function Newarrival() {
     outStock = outStockOnly,
     maxPrice = price
   ) => {
-    let filtered = allProducts;
+    let filtered = Products;
 
     if (category) {
       filtered = filtered.filter(p => p.category === category);
@@ -94,33 +99,81 @@ export default function Newarrival() {
 
       {/* ================= PRODUCT GRID ================= */}
       <div className={`max-w-7xl mx-auto p-6 grid gap-6
-        ${activeGrid === 1 ? "grid-cols-1" :
+          ${activeGrid === 1 ? "grid-cols-1" :
           activeGrid === 2 ? "grid-cols-2" :
             activeGrid === 3 ? "grid-cols-3" :
               activeGrid === 4 ? "grid-cols-4" :
                 activeGrid === 5 ? "grid-cols-5" :
                   "grid-cols-6"}`}>
 
-        {products.length === 0 ? (
-          <p className="col-span-full text-center text-gray-500">No products found</p>
-        ) : (
-          products.map((p) => (
-            <div key={p.id} className="border p-4 hover:shadow transition">
-              <div className="h-40 bg-gray-100 mb-3 flex items-center justify-center">Image</div>
-              <h3 className="font-medium">{p.name}</h3>
-              <p className="text-sm text-gray-500">{p.category}</p>
-              <p className="font-bold">${p.price}</p>
-              <p className="text-xs">{p.inStock ? "In Stock" : "Out of Stock"}</p>
+        {products.map((p) => (
+          <div key={p.id} className="group">
+            {/* CARD */}
+            <div className="relative overflow-hidden rounded-xl bg-gray-100">
+              {/* IMAGES */}
+              <div className="relative w-full h-[350px]">
+                <img src={p.img1}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0" />
+                <img src={p.img2}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </div>
+
+              {/* ACTION BUTTONS */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 transition">
+
+                {/* CART */}
+                <button onClick={() => addToCart(p)}
+                  className="w-10 h-10 bg-white rounded-lg shadow hover:bg-black hover:text-white">
+                  <i className="fa-solid fa-cart-plus"></i>
+                </button>
+
+                {/* WISHLIST */}
+                <button
+                  onClick={() => toggleWishlist(p)}
+                  className="w-10 h-10 bg-white rounded-lg shadow hover:bg-black hover:text-white">
+                  <i className={`fa-heart ${wishlistItems.some(i => i.id === p.id) ? "fa-solid text-red-500" : "fa-regular"}`}></i>
+                </button>
+
+                {/* COMPARE */}
+                <button
+                  onClick={() => addToCompare(p)}
+                  className="w-10 h-10 bg-white rounded-lg shadow hover:bg-black hover:text-white">
+                  <i className="fa-solid fa-code-compare"></i>
+                </button>
+
+                {/* QUICK VIEW */}
+                <button
+                  onClick={() => setQuickViewProduct(p)}
+                  className="w-10 h-10 bg-white rounded-lg shadow hover:bg-black hover:text-white">
+                  <i className="fa-regular fa-eye"></i>
+                </button>
+              </div>
             </div>
-          ))
-        )}
+
+            {/* INFO */}
+            <h6 className="mt-3 text-sm">{p.name}</h6>
+            <p className="font-bold">${p.price}</p>
+
+            {/* COLORS */}
+            <div className="flex gap-2 mt-2">
+              {p.colors?.map((c, i) => (
+                <span
+                  key={i}
+                  className="w-4 h-4 rounded-full border"
+                  style={{ background: c }}
+                ></span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
+
 
       {/* ================= FILTER SIDEBAR ================= */}
       <div className={`fixed inset-0 z-[999] ${isFilterOpen ? "visible" : "invisible"}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setIsFilterOpen(false)}></div>
 
-        <div className={`absolute left-0 top-0 h-full w-[320px] bg-white shadow-lg transform transition-transform duration-300 ${isFilterOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`absolute left-0 top-0 h-full w-[350px] bg-white shadow-lg transform transition-transform duration-300 ${isFilterOpen ? "translate-x-0" : "-translate-x-full"}`}>
 
           {/* HEADER */}
           <div className="p-4 border-b flex justify-between items-center">
@@ -138,7 +191,7 @@ export default function Newarrival() {
 
               {openCategory && (
                 <div className="mt-4 space-y-2">
-                  {["Fashion","Men","Women","Denim","Dress"].map(cat => (
+                  {["Fashion", "Men", "Women", "Denim", "Dress"].map(cat => (
                     <p
                       key={cat}
                       className={`cursor-pointer ${selectedCategory === cat ? "text-red-500" : ""}`}
@@ -230,7 +283,7 @@ export default function Newarrival() {
             {/* CLEAR */}
             <button
               onClick={() => {
-                setProducts(allProducts);
+                setProducts(Products);
                 setSelectedCategory(null);
                 setInStockOnly(false);
                 setOutStockOnly(false);
