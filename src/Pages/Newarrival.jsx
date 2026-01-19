@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Products from '../Data/Product';
+// import newProduct from '../Data/Newarrival';
 
 export default function Newarrival() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
