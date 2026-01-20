@@ -1,20 +1,147 @@
 import React, { useState, useRef } from "react";
-import Products from "../Data/Product";
-import { useNavigate } from "react-router-dom";
+
+// Product data with proper structure
+const Products = [
+    {
+      id: 1,
+      name: "Ribbed Tank Top",
+      price: 16.95,
+      category: "Fashion",
+      inStock: true,
+      img1: "../src/assets/images/imgi_18_white-1.jpg",
+      img2: "../src/assets/images/imgi_18_white-1.jpg",
+      colors: ["orange", "black", "white"],
+      description: "Comfortable ribbed tank top for everyday wear"
+    },
+    {
+      id: 2,
+      name: "Ribbed Modal T-shirt",
+      price: 18.95,
+      category: "Fashion",
+      inStock: true,
+      img1: "../src/assets/images/imgi_38_green.jpg",
+      img2: "../src/assets/images/imgi_37_purple.jpg",
+      colors: ["brown", "pink", "lightgreen"],
+      description: "Soft modal fabric t-shirt with ribbed texture"
+    },
+    {
+      id: 3,
+      name: "Oversized Printed T-shirt",
+      price: 10.0,
+      category: "Men",
+      inStock: true,
+      img1: "../src/assets/images/imgi_20_white-3.jpg",
+      img2: "../src/assets/images/imgi_21_white-4.jpg",
+      colors: [],
+      description: "Trendy oversized printed t-shirt"
+    },
+    {
+      id: 4,
+      name: "Oversized Printed T-shirt",
+      price: 16.95,
+      category: "Women",
+      inStock: false,
+      img1: "../src/assets/images/imgi_22_white-2.jpg",
+      img2: "../src/assets/images/imgi_23_pink-1.jpg",
+      colors: ["white", "violet", "black"],
+      description: "Stylish oversized t-shirt with unique prints"
+    },
+    {
+      id: 5,
+      name: "V-neck linen T-shirt",
+      price: 16.95,
+      category: "Men",
+      inStock: true,
+      img1: "../src/assets/images/imgi_25_brown-2.jpg",
+      img2: "../src/assets/images/imgi_26_brown-3.jpg",
+      colors: ["orange", "black", "white"],
+      description: "Breathable linen t-shirt with v-neck design"
+    },
+    {
+      id: 6,
+      name: "Loose Fit Sweatshirt",
+      price: 18.95,
+      category: "Fashion",
+      inStock: true,
+      img1: "../src/assets/images/imgi_39_light-green-1.jpg",
+      img2: "../src/assets/images/imgi_40_light-green-2.jpg",
+      colors: ["brown", "pink", "lightgreen"],
+      description: "Comfortable loose fit sweatshirt"
+    },
+    {
+      id: 7,
+      name: "Regular Fit oxford Shirt",
+      price: 10.0,
+      category: "Men",
+      inStock: true,
+      img1: "../src/assets/images/imgi_51_white-7.jpg",
+      img2: "../src/assets/images/imgi_47_black-5.jpg",
+      colors: [],
+      description: "Classic oxford shirt for formal occasions"
+    },
+    {
+      id: 8,
+      name: "Loose Fit Hoodie",
+      price: 16.95,
+      category: "Fashion",
+      inStock: true,
+      img1: "../src/assets/images/imgi_52_white-8.jpg",
+      img2: "../src/assets/images/imgi_53_black-6.jpg",
+      colors: ["white", "violet", "black"],
+      description: "Cozy loose fit hoodie for casual wear"
+    },
+    {
+      id: 9,
+      name: "Patterned scarf",
+      price: 16.95,
+      category: "Fashion",
+      inStock: false,
+      img1: "../src/assets/images/imgi_56_brown-4.jpg",
+      img2: "../src/assets/images/imgi_57_black-8.jpg",
+      colors: ["orange", "black", "white"],
+      description: "Stylish patterned scarf for all seasons"
+    },
+    {
+      id: 10,
+      name: "Slim Fit Fine-Knit Turtleneck Sweater",
+      price: 18.95,
+      category: "Denim",
+      inStock: true,
+      img1: "../src/assets/images/imgi_58_black-9.jpg",
+      img2: "../src/assets/images/imgi_59_black-10.jpg",
+      colors: ["brown", "pink", "lightgreen"],
+      description: "Elegant turtleneck sweater with slim fit"
+    },
+    {
+      id: 11,
+      name: "Slim Fit Fine-Knit Turtleneck Sweater",
+      price: 10.0,
+      category: "Dress",
+      inStock: true,
+      img1: "../src/assets/images/imgi_61_grey-2.jpg",
+      img2: "../src/assets/images/imgi_62_grey.jpg",
+      colors: [],
+      description: "Fine-knit turtleneck in neutral colors"
+    },
+    {
+      id: 12,
+      name: "Slim Fit Fine-Knit Turtleneck Sweater",
+      price: 16.95,
+      category: "Fashion",
+      inStock: true,
+      img1: "../src/assets/images/imgi_65_black-11.jpg",
+      img2: "../src/assets/images/imgi_66_black-12.jpg",
+      colors: ["white", "violet", "black"],
+      description: "Versatile turtleneck sweater for winter"
+    },
+];
 
 export default function Newarrival() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeGrid, setActiveGrid] = useState(4);
   const [products, setProducts] = useState(Products);
 
-  const [wishlistItems, setWishlistItems] = useState(() => {
-    try {
-      const raw = typeof window !== "undefined" ? localStorage.getItem("wishlistItems") : null;
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [wishlistItems, setWishlistItems] = useState([]);
 
   const isInWishlist = (id) => wishlistItems.some((item) => item.id === id);
 
@@ -26,23 +153,14 @@ export default function Newarrival() {
       updated = [...wishlistItems, product];
     }
     setWishlistItems(updated);
-    try {
-      localStorage.setItem("wishlistItems", JSON.stringify(updated));
-    } catch {
-      // ignore storage errors
-    }
   };
 
   const addToCart = (product) => {
-    // Replace with real cart logic later
     alert("Added to cart: " + product.name);
   };
 
-  // kept for possible future features
-  const swiperRef = useRef(null);
   const [activePopup, setActivePopup] = useState(null);
   const togglePopup = (id) => setActivePopup(activePopup === id ? null : id);
-  const navigate = useNavigate();
 
   // FILTER STATES
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -75,9 +193,9 @@ export default function Newarrival() {
   return (
     <div>
       {/* HEADER */}
-      <div className="container-fluid text-center py-16 bg-[#fef3f1]">
-        <h2 className="text-4xl">New Arrival</h2>
-        <p>Shop through our latest selection of Fashion</p>
+      <div className="container-fluid text-center py-16 bg-pink-50">
+        <h2 className="text-4xl font-bold">New Arrival</h2>
+        <p className="mt-2 text-gray-600">Shop through our latest selection of Fashion</p>
       </div>
 
       {/* TOP BAR */}
@@ -134,22 +252,22 @@ export default function Newarrival() {
         {products.map((p) => (
           <div key={p.id} className="group relative">
             {/* CARD */}
-            <div className="relative overflow-hidden rounded-xl bg-[#f5f5f5]">
-              {/* IMAGE WRAPPER */}
+            <div className="relative overflow-hidden rounded-xl bg-gray-100">
+              {/* IMAGE WRAPPER - FIXED: Added pointer-events-none to images */}
               <div className="relative w-full h-[380px]">
                 <img
                   src={p.img1}
                   alt={p.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 pointer-events-none"
                 />
                 <img
                   src={p.img2}
                   alt={p.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
                 />
               </div>
 
-              {/* ACTION BUTTONS (z-20 so they are above normal content) */}
+              {/* ACTION BUTTONS */}
               <div
                 className="
                   absolute bottom-4 left-1/2 -translate-x-1/2
@@ -160,14 +278,13 @@ export default function Newarrival() {
                   z-20
                 "
               >
-                {/* Note: icons have pointer-events-none so button receives clicks reliably */}
                 <button
                   type="button"
                   onClick={() => addToCart(p)}
                   aria-label={`Add ${p.name} to cart`}
                   className="w-11 h-11 bg-white rounded-lg shadow flex items-center justify-center hover:bg-black hover:text-white transition"
                 >
-                  <i className="fa-solid fa-cart-plus pointer-events-none" />
+                  🛒
                 </button>
 
                 <button
@@ -176,9 +293,9 @@ export default function Newarrival() {
                   aria-label={isInWishlist(p.id) ? "Remove from wishlist" : "Add to wishlist"}
                   className="w-11 h-11 bg-white rounded-lg shadow flex items-center justify-center hover:bg-black hover:text-white transition"
                 >
-                  <i
-                    className={`fa-heart pointer-events-none ${isInWishlist(p.id) ? "fa-solid text-red-500" : "fa-regular"}`}
-                  />
+                  <span className={isInWishlist(p.id) ? "text-red-500" : ""}>
+                    {isInWishlist(p.id) ? "❤️" : "🤍"}
+                  </span>
                 </button>
 
                 <button
@@ -186,11 +303,10 @@ export default function Newarrival() {
                   aria-label="Compare"
                   className="w-11 h-11 bg-white rounded-lg shadow flex items-center justify-center hover:bg-black hover:text-white transition"
                   onClick={() => {
-                    // placeholder compare action
                     alert(`Compare ${p.name}`);
                   }}
                 >
-                  <i className="fa-solid fa-code-compare pointer-events-none" />
+                  ⚖️
                 </button>
 
                 <button
@@ -199,7 +315,7 @@ export default function Newarrival() {
                   className="w-11 h-11 bg-white rounded-lg shadow flex items-center justify-center hover:bg-black hover:text-white transition"
                   onClick={() => togglePopup(p.id)}
                 >
-                  <i className="fa-regular fa-eye pointer-events-none" />
+                  👁️
                 </button>
               </div>
             </div>
@@ -209,28 +325,36 @@ export default function Newarrival() {
             <p className="font-bold">${p.price}</p>
 
             {/* COLORS */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-2">
               {p.colors?.map((c, i) => (
                 <span key={i} className="w-4 h-4 rounded-full border" style={{ background: c }} />
               ))}
             </div>
 
-            {/* Optional quick view popup (simple inline render) */}
+            {/* Quick view popup */}
             {activePopup === p.id && (
-              <div className="absolute inset-0 bg-white/90 p-4 z-30 flex flex-col">
-                <button
-                  type="button"
-                  onClick={() => setActivePopup(null)}
-                  className="self-end mb-4"
-                >
-                  Close
-                </button>
-                <div className="flex gap-4">
-                  <img src={p.img1} alt={p.name} className="w-40 h-40 object-cover" />
-                  <div>
-                    <h4 className="font-bold">{p.name}</h4>
-                    <p>${p.price}</p>
-                    <p className="text-sm mt-2">{p.description}</p>
+              <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setActivePopup(null)}>
+                <div className="bg-white rounded-lg p-6 max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
+                  <button
+                    type="button"
+                    onClick={() => setActivePopup(null)}
+                    className="float-right text-2xl hover:text-red-500"
+                  >
+                    ✕
+                  </button>
+                  <div className="flex gap-4 mt-8">
+                    <img src={p.img1} alt={p.name} className="w-40 h-40 object-cover rounded" />
+                    <div>
+                      <h4 className="font-bold text-xl">{p.name}</h4>
+                      <p className="text-2xl font-bold mt-2">${p.price}</p>
+                      <p className="text-sm mt-4 text-gray-600">{p.description}</p>
+                      <button
+                        onClick={() => addToCart(p)}
+                        className="mt-4 bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -239,7 +363,7 @@ export default function Newarrival() {
         ))}
       </div>
 
-      {/* FILTER SIDEBAR - only render when open so it can't block clicks when closed */}
+      {/* FILTER SIDEBAR */}
       {isFilterOpen && (
         <div className="fixed inset-0 z-[999]">
           {/* Backdrop */}
@@ -248,14 +372,14 @@ export default function Newarrival() {
             onClick={() => setIsFilterOpen(false)}
           />
 
-          <div className="absolute left-0 top-0 h-full w-[350px] bg-white shadow-lg transform transition-transform duration-300 translate-x-0">
+          <div className="absolute left-0 top-0 h-full w-[350px] bg-white shadow-lg transform transition-transform duration-300 translate-x-0 overflow-y-auto">
             {/* HEADER */}
-            <div className="p-4 border-b flex justify-between items-center">
+            <div className="p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10">
               <div className="font-medium">☰ FILTER</div>
-              <button type="button" onClick={() => setIsFilterOpen(false)}>✕</button>
+              <button type="button" onClick={() => setIsFilterOpen(false)} className="text-xl">✕</button>
             </div>
 
-            <div className="p-4 space-y-6 overflow-y-auto h-full">
+            <div className="p-4 space-y-6">
               {/* Product categories */}
               <div>
                 <button
@@ -263,7 +387,7 @@ export default function Newarrival() {
                   onClick={() => setOpenCategory((s) => !s)}
                   className="w-full flex justify-between items-center text-lg font-medium"
                 >
-                  Product categories <span>{openCategory ? "⌃" : "⌄"}</span>
+                  Product categories <span>{openCategory ? "−" : "+"}</span>
                 </button>
 
                 {openCategory && (
@@ -271,7 +395,7 @@ export default function Newarrival() {
                     {["Fashion", "Men", "Women", "Denim", "Dress"].map((cat) => (
                       <p
                         key={cat}
-                        className={`cursor-pointer ${selectedCategory === cat ? "text-red-500" : ""}`}
+                        className={`cursor-pointer hover:text-red-500 ${selectedCategory === cat ? "text-red-500 font-medium" : ""}`}
                         onClick={() => {
                           setSelectedCategory(cat);
                           applyFilter(cat, inStockOnly, outStockOnly, price);
@@ -293,12 +417,12 @@ export default function Newarrival() {
                   onClick={() => setOpenAvailability((s) => !s)}
                   className="w-full flex justify-between items-center text-lg font-medium"
                 >
-                  Availability <span>{openAvailability ? "⌃" : "⌄"}</span>
+                  Availability <span>{openAvailability ? "−" : "+"}</span>
                 </button>
 
                 {openAvailability && (
                   <div className="mt-4 space-y-3 text-sm">
-                    <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={inStockOnly}
@@ -312,7 +436,7 @@ export default function Newarrival() {
                       In stock
                     </label>
 
-                    <label className="flex items-center gap-2">
+                    <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={outStockOnly}
@@ -338,7 +462,7 @@ export default function Newarrival() {
                   onClick={() => setOpenPrice((s) => !s)}
                   className="w-full flex justify-between items-center text-lg font-medium"
                 >
-                  Price <span>{openPrice ? "⌃" : "⌄"}</span>
+                  Price <span>{openPrice ? "−" : "+"}</span>
                 </button>
 
                 {openPrice && (
