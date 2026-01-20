@@ -168,7 +168,7 @@ function Header({ wishlistCount, cart, setCart }) {
         </div>
 
         <div id="mobileMenu" className="lg:hidden hidden border-t">
-          <div class="flex flex-col p-4 gap-4 font-medium">
+          <div className="flex flex-col p-4 gap-4 font-medium">
             <Link to="/">Home</Link>
             <Link to="">Shop</Link>
             <Link to="">Products</Link>
