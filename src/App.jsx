@@ -96,14 +96,22 @@ function App() {
               addToCart={addToCart}
             />
           }
-          />
+        />
 
-          <Route path="/collection" element={<Collection />}/>
-          <Route path="/newarrival" element={<Newarrival />}/>
+        <Route path="/collection" element={<Collection />} />
+        
+        <Route
+          path="/newarrival"
+          element={
+            <Newarrival
+              addToCart={addToCart}
+              toggleWishlist={toggleWishlist}
+              isInWishlist={isInWishlist}
+            />
+          }
+        />
+
       </Routes>
-
-
-
       <Footer />
     </BrowserRouter>
   );

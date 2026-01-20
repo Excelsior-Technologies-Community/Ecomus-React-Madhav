@@ -1,166 +1,151 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 // Product data with proper structure
 const Products = [
-    {
-      id: 1,
-      name: "Ribbed Tank Top",
-      price: 16.95,
-      category: "Fashion",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["orange", "black", "white"],
-      description: "Comfortable ribbed tank top for everyday wear"
-    },
-    {
-      id: 2,
-      name: "Ribbed Modal T-shirt",
-      price: 18.95,
-      category: "Fashion",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["brown", "pink", "lightgreen"],
-      description: "Soft modal fabric t-shirt with ribbed texture"
-    },
-    {
-      id: 3,
-      name: "Oversized Printed T-shirt",
-      price: 10.0,
-      category: "Men",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: [],
-      description: "Trendy oversized printed t-shirt"
-    },
-    {
-      id: 4,
-      name: "Oversized Printed T-shirt",
-      price: 16.95,
-      category: "Women",
-      inStock: false,
-      img1: "",
-      img2: "",
-      colors: ["white", "violet", "black"],
-      description: "Stylish oversized t-shirt with unique prints"
-    },
-    {
-      id: 5,
-      name: "V-neck linen T-shirt",
-      price: 16.95,
-      category: "Men",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["orange", "black", "white"],
-      description: "Breathable linen t-shirt with v-neck design"
-    },
-    {
-      id: 6,
-      name: "Loose Fit Sweatshirt",
-      price: 18.95,
-      category: "Fashion",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["brown", "pink", "lightgreen"],
-      description: "Comfortable loose fit sweatshirt"
-    },
-    {
-      id: 7,
-      name: "Regular Fit oxford Shirt",
-      price: 10.0,
-      category: "Men",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: [],
-      description: "Classic oxford shirt for formal occasions"
-    },
-    {
-      id: 8,
-      name: "Loose Fit Hoodie",
-      price: 16.95,
-      category: "Fashion",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["white", "violet", "black"],
-      description: "Cozy loose fit hoodie for casual wear"
-    },
-    {
-      id: 9,
-      name: "Patterned scarf",
-      price: 16.95,
-      category: "Fashion",
-      inStock: false,
-      img1: "",
-      img2: "",
-      colors: ["orange", "black", "white"],
-      description: "Stylish patterned scarf for all seasons"
-    },
-    {
-      id: 10,
-      name: "Slim Fit Fine-Knit Turtleneck Sweater",
-      price: 18.95,
-      category: "Denim",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["brown", "pink", "lightgreen"],
-      description: "Elegant turtleneck sweater with slim fit"
-    },
-    {
-      id: 11,
-      name: "Slim Fit Fine-Knit Turtleneck Sweater",
-      price: 10.0,
-      category: "Dress",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: [],
-      description: "Fine-knit turtleneck in neutral colors"
-    },
-    {
-      id: 12,
-      name: "Slim Fit Fine-Knit Turtleneck Sweater",
-      price: 16.95,
-      category: "Fashion",
-      inStock: true,
-      img1: "",
-      img2: "",
-      colors: ["white", "violet", "black"],
-      description: "Versatile turtleneck sweater for winter"
-    },
+  {
+    id: 1,
+    name: "Ribbed Tank Top",
+    price: 16.95,
+    category: "Fashion",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["orange", "black", "white"],
+    description: "Comfortable ribbed tank top for everyday wear"
+  },
+  {
+    id: 2,
+    name: "Ribbed Modal T-shirt",
+    price: 18.95,
+    category: "Fashion",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["brown", "pink", "lightgreen"],
+    description: "Soft modal fabric t-shirt with ribbed texture"
+  },
+  {
+    id: 3,
+    name: "Oversized Printed T-shirt",
+    price: 10.0,
+    category: "Men",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: [],
+    description: "Trendy oversized printed t-shirt"
+  },
+  {
+    id: 4,
+    name: "Oversized Printed T-shirt",
+    price: 16.95,
+    category: "Women",
+    inStock: false,
+    img1: "",
+    // img2: "",
+    colors: ["white", "violet", "black"],
+    description: "Stylish oversized t-shirt with unique prints"
+  },
+  {
+    id: 5,
+    name: "V-neck linen T-shirt",
+    price: 16.95,
+    category: "Men",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["orange", "black", "white"],
+    description: "Breathable linen t-shirt with v-neck design"
+  },
+  {
+    id: 6,
+    name: "Loose Fit Sweatshirt",
+    price: 18.95,
+    category: "Fashion",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["brown", "pink", "lightgreen"],
+    description: "Comfortable loose fit sweatshirt"
+  },
+  {
+    id: 7,
+    name: "Regular Fit oxford Shirt",
+    price: 10.0,
+    category: "Men",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: [],
+    description: "Classic oxford shirt for formal occasions"
+  },
+  {
+    id: 8,
+    name: "Loose Fit Hoodie",
+    price: 16.95,
+    category: "Fashion",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["white", "violet", "black"],
+    description: "Cozy loose fit hoodie for casual wear"
+  },
+  {
+    id: 9,
+    name: "Patterned scarf",
+    price: 16.95,
+    category: "Fashion",
+    inStock: false,
+    img1: "",
+    // img2: "",
+    colors: ["orange", "black", "white"],
+    description: "Stylish patterned scarf for all seasons"
+  },
+  {
+    id: 10,
+    name: "Slim Fit Fine-Knit Turtleneck Sweater",
+    price: 18.95,
+    category: "Denim",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["brown", "pink", "lightgreen"],
+    description: "Elegant turtleneck sweater with slim fit"
+  },
+  {
+    id: 11,
+    name: "Slim Fit Fine-Knit Turtleneck Sweater",
+    price: 10.0,
+    category: "Dress",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: [],
+    description: "Fine-knit turtleneck in neutral colors"
+  },
+  {
+    id: 12,
+    name: "Slim Fit Fine-Knit Turtleneck Sweater",
+    price: 16.95,
+    category: "Fashion",
+    inStock: true,
+    img1: "",
+    // img2: "",
+    colors: ["white", "violet", "black"],
+    description: "Versatile turtleneck sweater for winter"
+  },
 ];
 
-export default function Newarrival() {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [activeGrid, setActiveGrid] = useState(4);
+export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) {
   const [products, setProducts] = useState(Products);
 
-  const [wishlistItems, setWishlistItems] = useState([]);
-
-  const isInWishlist = (id) => wishlistItems.some((item) => item.id === id);
-
-  const toggleWishlist = (product) => {
-    let updated;
-    if (wishlistItems.some((i) => i.id === product.id)) {
-      updated = wishlistItems.filter((i) => i.id !== product.id);
-    } else {
-      updated = [...wishlistItems, product];
-    }
-    setWishlistItems(updated);
-  };
-
-  const addToCart = (product) => {
-    alert("Added to cart: " + product.name);
-  };
+  const [activeGrid, setActiveGrid] = useState(4);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [activePopup, setActivePopup] = useState(null);
-  const togglePopup = (id) => setActivePopup(activePopup === id ? null : id);
+  const togglePopup = (id) => {
+    setActivePopup(activePopup === id ? null : id);
+  };
 
   // FILTER STATES
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -235,19 +220,18 @@ export default function Newarrival() {
 
       {/* PRODUCT GRID */}
       <div
-        className={`max-w-7xl mx-auto p-6 grid gap-6 ${
-          activeGrid === 1
-            ? "grid-cols-1"
-            : activeGrid === 2
+        className={`max-w-7xl mx-auto p-6 grid gap-6 ${activeGrid === 1
+          ? "grid-cols-1"
+          : activeGrid === 2
             ? "grid-cols-2"
             : activeGrid === 3
-            ? "grid-cols-3"
-            : activeGrid === 4
-            ? "grid-cols-4"
-            : activeGrid === 5
-            ? "grid-cols-5"
-            : "grid-cols-6"
-        }`}
+              ? "grid-cols-3"
+              : activeGrid === 4
+                ? "grid-cols-4"
+                : activeGrid === 5
+                  ? "grid-cols-5"
+                  : "grid-cols-6"
+          }`}
       >
         {products.map((p) => (
           <div key={p.id} className="group relative">
@@ -264,7 +248,7 @@ export default function Newarrival() {
                     e.target.alt = 'Image not found';
                   }}
                 />
-                <img
+                {/* <img
                   src={p.img2}
                   alt={p.name}
                   className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
@@ -272,7 +256,7 @@ export default function Newarrival() {
                     e.target.style.background = '#ddd';
                     e.target.alt = 'Image not found';
                   }}
-                />
+                /> */}
               </div>
 
               {/* ACTION BUTTONS - POSITIONED ABSOLUTELY OVER IMAGES */}
@@ -345,12 +329,12 @@ export default function Newarrival() {
 
       {/* Quick view popup - FIXED POSITION MODAL */}
       {activePopup && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4" 
+        <div
+          className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
           onClick={() => setActivePopup(null)}
         >
-          <div 
-            className="bg-white rounded-lg p-6 max-w-2xl w-full" 
+          <div
+            className="bg-white rounded-lg p-6 max-w-2xl w-full"
             onClick={(e) => e.stopPropagation()}
           >
             {products.find(p => p.id === activePopup) && (
@@ -363,10 +347,10 @@ export default function Newarrival() {
                   ✕
                 </button>
                 <div className="flex gap-4 mt-8">
-                  <img 
-                    src={products.find(p => p.id === activePopup).img1} 
-                    alt={products.find(p => p.id === activePopup).name} 
-                    className="w-40 h-40 object-cover rounded" 
+                  <img
+                    src={products.find(p => p.id === activePopup).img1}
+                    alt={products.find(p => p.id === activePopup).name}
+                    className="w-40 h-40 object-cover rounded"
                   />
                   <div>
                     <h4 className="font-bold text-xl">{products.find(p => p.id === activePopup).name}</h4>
