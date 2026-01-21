@@ -8,8 +8,13 @@ const Products = [
     price: 16.95,
     category: "Fashion",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_18_white-1.jpg",
+    img2: "../src/assets/images/imgi_19_black-1.jpg",
+    colorImages: {
+      orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      black: "../src/assets/images/imgi_19_black-1.jpg",
+      white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["orange", "black", "white"],
     description: "Comfortable ribbed tank top for everyday wear"
   },
@@ -19,8 +24,13 @@ const Products = [
     price: 18.95,
     category: "Fashion",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_38_green.jpg",
+    img2: "",
+    colorImages: {
+      brown: "../src/assets/images/imgi_17_orange-1.jpg",
+      pink: "../src/assets/images/imgi_19_black-1.jpg",
+      lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["brown", "pink", "lightgreen"],
     description: "Soft modal fabric t-shirt with ribbed texture"
   },
@@ -30,8 +40,13 @@ const Products = [
     price: 10.0,
     category: "Men",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_20_white-3.jpg",
+    img2: "",
+    colorImages: {
+      // orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      // black: "../src/assets/images/imgi_19_black-1.jpg",
+      // white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: [],
     description: "Trendy oversized printed t-shirt"
   },
@@ -41,8 +56,13 @@ const Products = [
     price: 16.95,
     category: "Women",
     inStock: false,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_22_white-2.jpg",
+    img2: "",
+    colorImages: {
+      white: "../src/assets/images/imgi_17_orange-1.jpg",
+      violet: "../src/assets/images/imgi_19_black-1.jpg",
+      black: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["white", "violet", "black"],
     description: "Stylish oversized t-shirt with unique prints"
   },
@@ -52,8 +72,13 @@ const Products = [
     price: 16.95,
     category: "Men",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_25_brown-2.jpg",
+    img2: "",
+    colorImages: {
+      orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      black: "../src/assets/images/imgi_19_black-1.jpg",
+      white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["orange", "black", "white"],
     description: "Breathable linen t-shirt with v-neck design"
   },
@@ -63,8 +88,13 @@ const Products = [
     price: 18.95,
     category: "Fashion",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_39_light-green-1.jpg",
+    img2: "",
+    colorImages: {
+      brown: "../src/assets/images/imgi_17_orange-1.jpg",
+      pink: "../src/assets/images/imgi_19_black-1.jpg",
+      lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["brown", "pink", "lightgreen"],
     description: "Comfortable loose fit sweatshirt"
   },
@@ -74,8 +104,13 @@ const Products = [
     price: 10.0,
     category: "Men",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_51_white-7.jpg",
+    img2: "",
+    colorImages: {
+      // orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      // black: "../src/assets/images/imgi_19_black-1.jpg",
+      // white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: [],
     description: "Classic oxford shirt for formal occasions"
   },
@@ -85,8 +120,13 @@ const Products = [
     price: 16.95,
     category: "Fashion",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_52_white-8.jpg",
+    img2: "",
+    colorImages: {
+      white: "../src/assets/images/imgi_17_orange-1.jpg",
+      violet: "../src/assets/images/imgi_19_black-1.jpg",
+      black: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["white", "violet", "black"],
     description: "Cozy loose fit hoodie for casual wear"
   },
@@ -96,8 +136,13 @@ const Products = [
     price: 16.95,
     category: "Fashion",
     inStock: false,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_56_brown-4.jpg",
+    img2: "",
+    colorImages: {
+      orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      black: "../src/assets/images/imgi_19_black-1.jpg",
+      white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["orange", "black", "white"],
     description: "Stylish patterned scarf for all seasons"
   },
@@ -107,8 +152,13 @@ const Products = [
     price: 18.95,
     category: "Denim",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_58_black-9.jpg",
+    img2: "",
+    colorImages: {
+      brown: "../src/assets/images/imgi_17_orange-1.jpg",
+      pink: "../src/assets/images/imgi_19_black-1.jpg",
+      lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["brown", "pink", "lightgreen"],
     description: "Elegant turtleneck sweater with slim fit"
   },
@@ -118,8 +168,13 @@ const Products = [
     price: 10.0,
     category: "Dress",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_61_grey-2.jpg",
+    img2: "",
+    colorImages: {
+      // orange: "../src/assets/images/imgi_17_orange-1.jpg",
+      // black: "../src/assets/images/imgi_19_black-1.jpg",
+      // white: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: [],
     description: "Fine-knit turtleneck in neutral colors"
   },
@@ -129,8 +184,13 @@ const Products = [
     price: 16.95,
     category: "Fashion",
     inStock: true,
-    img1: "",
-    // img2: "",
+    img1: "../src/assets/images/imgi_65_black-11.jpg",
+    img2: "",
+    colorImages: {
+      white: "../src/assets/images/imgi_17_orange-1.jpg",
+      violet: "../src/assets/images/imgi_19_black-1.jpg",
+      black: "../src/assets/images/imgi_18_white-1.jpg"
+    },
     colors: ["white", "violet", "black"],
     description: "Versatile turtleneck sweater for winter"
   },
@@ -146,6 +206,8 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
   const togglePopup = (id) => {
     setActivePopup(activePopup === id ? null : id);
   };
+
+  const [hoverImage, setHoverImage] = useState({});
 
   // FILTER STATES
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -213,8 +275,13 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
 
         <select className="border px-4 py-2 text-sm outline-none">
           <option>Featured</option>
-          <option>Price: Low to High</option>
+          <option>Best Selling</option>
+          <option>Alphabetically, A-Z</option>
+          <option>Alphabetically, Z-A</option>
           <option>Price: High to Low</option>
+          <option>Price: Low to High</option>
+          <option>Date, old to new</option>
+          <option>Date, new to old</option>
         </select>
       </div>
 
@@ -240,15 +307,15 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
               {/* IMAGE WRAPPER WITH FIXED HEIGHT */}
               <div className="relative w-full" style={{ height: '380px' }}>
                 <img
-                  src={p.img1}
+                  src={hoverImage[p.id] || p.img1}
                   alt={p.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none"
                   onError={(e) => {
                     e.target.style.background = '#ddd';
                     e.target.alt = 'Image not found';
                   }}
                 />
-                {/* <img
+                <img
                   src={p.img2}
                   alt={p.name}
                   className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none"
@@ -256,11 +323,11 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                     e.target.style.background = '#ddd';
                     e.target.alt = 'Image not found';
                   }}
-                /> */}
+                />
               </div>
 
               {/* ACTION BUTTONS - POSITIONED ABSOLUTELY OVER IMAGES */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 gap-2 translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-20 hidden group-hover:flex">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 gap-1 translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-20 hidden group-hover:flex">
                 <button
                   type="button"
                   onClick={(e) => {
@@ -320,7 +387,19 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
             {/* COLORS */}
             <div className="flex gap-2 mt-2">
               {p.colors?.map((c, i) => (
-                <span key={i} className="w-4 h-4 rounded-full border" style={{ background: c }} />
+                <span
+                  key={i}
+                  className="w-4 h-4 rounded-full border cursor-pointer"
+                  style={{ background: c }}
+                  onMouseEnter={() => {
+                    if (p.colorImages?.[c]) {
+                      setHoverImage(prev => ({ ...prev, [p.id]: p.colorImages[c] }));
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setHoverImage(prev => ({ ...prev, [p.id]: null }));
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -334,44 +413,138 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
           onClick={() => setActivePopup(null)}
         >
           <div
-            className="bg-white rounded-lg p-6 max-w-2xl w-full"
+            className="bg-white w-full max-w-4xl rounded-xl overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {products.find(p => p.id === activePopup) && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setActivePopup(null)}
-                  className="float-right text-2xl hover:text-red-500"
-                >
-                  ✕
-                </button>
-                <div className="flex gap-4 mt-8">
-                  <img
-                    src={products.find(p => p.id === activePopup).img1}
-                    alt={products.find(p => p.id === activePopup).name}
-                    className="w-40 h-40 object-cover rounded"
-                  />
-                  <div>
-                    <h4 className="font-bold text-xl">{products.find(p => p.id === activePopup).name}</h4>
-                    <p className="text-2xl font-bold mt-2">${products.find(p => p.id === activePopup).price}</p>
-                    <p className="text-sm mt-4 text-gray-600">{products.find(p => p.id === activePopup).description}</p>
-                    <button
-                      onClick={() => {
-                        addToCart(products.find(p => p.id === activePopup));
-                        setActivePopup(null);
-                      }}
-                      className="mt-4 bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-                    >
-                      Add to Cart
-                    </button>
+            {(() => {
+              const product = products.find(p => p.id === activePopup);
+              if (!product) return null;
+
+              return (
+                <>
+                  {/* CLOSE */}
+                  <button onClick={() => setActivePopup(null)} className="absolute top-4 right-4 text-2xl z-50 hover:text-red-500">
+                    <i className="bi bi-x"></i>
+                  </button>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+
+                    {/* ================= LEFT IMAGE ================= */}
+                    <div className="relative bg-gray-100 flex items-center justify-center">
+                      <img
+                        src={product.img1}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+
+                      {/* Arrows (optional UI) */}
+                      <button className="absolute left-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center">
+                        <i className="bi bi-arrow-left"></i>
+                      </button>
+                      <button className="absolute right-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center">
+                        <i className="bi bi-arrow-right"></i>
+                      </button>
+                    </div>
+
+                    {/* ================= RIGHT INFO ================= */}
+                    <div className="p-8 overflow-y-auto max-h-[90vh]">
+
+                      <h2 className="text-3xl font-semibold mb-2">{product.name}</h2>
+
+                      {/* Badge */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="border px-3 py-1 text-xs font-medium">BEST SELLER</span>
+                        <span className="text-red-500 text-sm flex items-center gap-1">
+                          ⚡ Selling fast! 48 people have this in their carts.
+                        </span>
+                      </div>
+
+                      <p className="text-3xl font-bold mb-4">${product.price}</p>
+
+                      <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                        {product.description || "Premium quality product with modern design and perfect fitting."}
+                      </p>
+
+                      {/* ================= COLORS ================= */}
+                      <div className="mb-6">
+                        <p className="font-medium mb-2">Color:</p>
+                        <div className="flex gap-3">
+                          {product.colors?.map((c, i) => (
+                            <div
+                              key={i}
+                              className="w-8 h-8 rounded-full border-2 cursor-pointer"
+                              style={{ background: c }}
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* ================= SIZE ================= */}
+                      <div className="mb-6">
+                        <p className="font-medium mb-2">Size:</p>
+                        <div className="flex gap-3">
+                          {["S", "M", "L", "XL"].map((s) => (
+                            <button
+                              key={s}
+                              className="border px-4 py-2 hover:border-black"
+                            >
+                              {s}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* ================= QTY ================= */}
+                      <div className="mb-8">
+                        <p className="font-medium mb-2">Quantity:</p>
+                        <div className="flex items-center border w-max">
+                          <button className="px-4 py-2">-</button>
+                          <span className="px-6">1</span>
+                          <button className="px-4 py-2">+</button>
+                        </div>
+                      </div>
+
+                      {/* ================= ACTIONS ================= */}
+                      <div className="flex gap-3 mb-4">
+
+                        <button
+                          className="flex-1 bg-black text-white py-4 font-medium hover:bg-gray-800 transition"
+                          onClick={() => {
+                            addToCart(product);
+                            setActivePopup(null);
+                          }}
+                        >
+                          Add to cart — ${product.price}
+                        </button>
+
+                        <button className="w-14 border flex items-center justify-center text-xl">
+                          ❤
+                        </button>
+
+                        <button className="w-14 border flex items-center justify-center text-xl">
+                          ⇄
+                        </button>
+
+                      </div>
+
+                      {/* Paypal fake button */}
+                      <button className="w-full bg-yellow-400 py-4 font-semibold text-black">
+                        Buy with PayPal
+                      </button>
+
+                      <p className="text-center text-sm text-gray-500 mt-3 underline cursor-pointer">
+                        More payment options
+                      </p>
+
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                </>
+              );
+            })()}
           </div>
         </div>
       )}
+
 
       {/* FILTER SIDEBAR */}
       {isFilterOpen && (
