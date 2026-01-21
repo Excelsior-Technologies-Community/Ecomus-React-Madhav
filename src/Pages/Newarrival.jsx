@@ -576,7 +576,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                         {product.colors?.map((c, i) => (
                           <div
                             key={i}
-                            className="w-6 h-6 rounded-full border-2 cursor-pointer hover:scale-110 transition"
+                            className={`w-6 h-6 rounded-full border-2 cursor-pointer transition ${selectedColor === c ? "ring-2 ring-black scale-110" : ""}`}
                             style={{ background: c }}
                             onClick={() => {
                               setSelectedColor(c);
