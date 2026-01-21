@@ -11,6 +11,7 @@ function Header({ wishlistCount, cart, setCart }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMagnifyOpen, setIsMagnifyOpen] = useState(false);
 
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,9 +138,10 @@ function Header({ wishlistCount, cart, setCart }) {
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
 
-              <button className="hover:text-red-600">
-                <i class="fa-regular fa-user"></i>
+              <button className="hover:text-red-600" onClick={() => setIsLoginOpen(true)}>
+                <i className="fa-regular fa-user"></i>
               </button>
+
 
               <Link to="/wishlist">
                 <button className="relative hover:text-red-600">
@@ -302,7 +304,7 @@ function Header({ wishlistCount, cart, setCart }) {
 
             <div className="flex gap-3">
               <button className="flex-1 border py-3 rounded">
-                <Link to="/" className="no-underline text-black">View cart</Link>
+                <Link to="/newarrival" className="no-underline text-black">View cart</Link>
               </button>
               <button className="flex-1 bg-black text-white py-3 rounded">
                 Check out
@@ -386,6 +388,61 @@ function Header({ wishlistCount, cart, setCart }) {
         </div>
       </div>
       {/* ================= END SEARCH SIDEBAR ================= */}
+
+      {/* ================= LOGIN POPUP ================= */}
+      <div className={`fixed inset-0 z-[1000] ${isLoginOpen ? "visible" : "invisible"}`}>
+
+        {/* Backdrop */}
+        <div
+          className={`absolute inset-0 bg-black/40 transition-opacity ${isLoginOpen ? "opacity-100" : "opacity-0"}`}
+          onClick={() => setIsLoginOpen(false)}
+        ></div>
+
+        {/* Modal */}
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <div className={`bg-white w-full max-w-xl rounded-lg shadow-lg transform transition-all duration-300 ${isLoginOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
+
+            {/* Header */}
+            <div className="flex justify-between items-center p-6 border-b">
+              <h3 className="text-xl font-semibold">Log in</h3>
+              <button onClick={() => setIsLoginOpen(false)} className="text-2xl">✕</button>
+            </div>
+
+            {/* Body */}
+            <div className="p-6 space-y-4">
+
+              <input
+                type="email"
+                placeholder="Email *"
+                className="w-full border px-4 py-3 rounded outline-none focus:border-black"
+              />
+
+              <input
+                type="password"
+                placeholder="Password *"
+                className="w-full border px-4 py-3 rounded outline-none focus:border-black"
+              />
+
+              <div className="text-sm underline cursor-pointer text-gray-600">
+                Forgot your password?
+              </div>
+
+              <button className="w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition">
+                Log in
+              </button>
+
+              <div className="text-center text-sm mt-4">
+                <span className="underline cursor-pointer font-medium">
+                  New customer? Create your account ↗
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* ================= END LOGIN POPUP ================= */}
+
     </>
   );
 }

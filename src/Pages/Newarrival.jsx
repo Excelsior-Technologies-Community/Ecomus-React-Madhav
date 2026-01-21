@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 
 // Product data with proper structure
 const Products = [
@@ -16,6 +22,7 @@ const Products = [
       white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["orange", "black", "white"],
+    sizes: ["S", "M", "L"],
     description: "Comfortable ribbed tank top for everyday wear"
   },
   {
@@ -32,6 +39,7 @@ const Products = [
       lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["brown", "pink", "lightgreen"],
+    sizes: ["S", "M", "L"],
     description: "Soft modal fabric t-shirt with ribbed texture"
   },
   {
@@ -48,6 +56,7 @@ const Products = [
       // white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: [],
+    sizes: ["S", "M", "L"],
     description: "Trendy oversized printed t-shirt"
   },
   {
@@ -64,6 +73,7 @@ const Products = [
       black: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["white", "violet", "black"],
+    sizes: ["S", "M", "L"],
     description: "Stylish oversized t-shirt with unique prints"
   },
   {
@@ -80,6 +90,7 @@ const Products = [
       white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["orange", "black", "white"],
+    sizes: ["S", "M", "L"],
     description: "Breathable linen t-shirt with v-neck design"
   },
   {
@@ -96,6 +107,7 @@ const Products = [
       lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["brown", "pink", "lightgreen"],
+    sizes: ["S", "M", "L"],
     description: "Comfortable loose fit sweatshirt"
   },
   {
@@ -112,6 +124,7 @@ const Products = [
       // white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: [],
+    sizes: ["S", "M", "L"],
     description: "Classic oxford shirt for formal occasions"
   },
   {
@@ -128,6 +141,7 @@ const Products = [
       black: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["white", "violet", "black"],
+    sizes: ["S", "M", "L"],
     description: "Cozy loose fit hoodie for casual wear"
   },
   {
@@ -144,6 +158,7 @@ const Products = [
       white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["orange", "black", "white"],
+    sizes: ["S", "M", "L"],
     description: "Stylish patterned scarf for all seasons"
   },
   {
@@ -160,6 +175,7 @@ const Products = [
       lightgreen: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["brown", "pink", "lightgreen"],
+    sizes: ["S", "M", "L"],
     description: "Elegant turtleneck sweater with slim fit"
   },
   {
@@ -176,6 +192,7 @@ const Products = [
       // white: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: [],
+    sizes: ["S", "M", "L"],
     description: "Fine-knit turtleneck in neutral colors"
   },
   {
@@ -192,18 +209,28 @@ const Products = [
       black: "../src/assets/images/imgi_18_white-1.jpg"
     },
     colors: ["white", "violet", "black"],
+    sizes: ["S", "M", "L"],
     description: "Versatile turtleneck sweater for winter"
   },
 ];
 
 export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) {
+
+  const [quickViewImage, setQuickViewImage] = useState(null);
+
   const [products, setProducts] = useState(Products);
+
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+
 
   const [activeGrid, setActiveGrid] = useState(4);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [activePopup, setActivePopup] = useState(null);
   const togglePopup = (id) => {
+    setQuickViewImage(null);
     setActivePopup(activePopup === id ? null : id);
   };
 
@@ -223,19 +250,32 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
     category = selectedCategory,
     inStock = inStockOnly,
     outStock = outStockOnly,
-    maxPrice = price
+    maxPrice = price,
+    brands = selectedBrands,
+    colors = selectedColors,
+    sizes = selectedSizes
   ) => {
-    const numericMaxPrice = Number(maxPrice);
     let filtered = Products;
 
-    if (category) filtered = filtered.filter((p) => p.category === category);
-    if (inStock && !outStock) filtered = filtered.filter((p) => p.inStock === true);
-    if (!inStock && outStock) filtered = filtered.filter((p) => p.inStock === false);
+    if (category) filtered = filtered.filter(p => p.category === category);
 
-    filtered = filtered.filter((p) => Number(p.price) <= numericMaxPrice);
+    if (inStock && !outStock) filtered = filtered.filter(p => p.inStock === true);
+    if (!inStock && outStock) filtered = filtered.filter(p => p.inStock === false);
+
+    filtered = filtered.filter(p => Number(p.price) <= Number(maxPrice));
+
+    if (brands.length)
+      filtered = filtered.filter(p => brands.includes(p.brand));
+
+    if (colors.length)
+      filtered = filtered.filter(p => p.colors?.some(c => colors.includes(c)));
+
+    if (sizes.length)
+      filtered = filtered.filter(p => p.sizes?.some(s => sizes.includes(s)));
 
     setProducts(filtered);
   };
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -406,16 +446,43 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
         ))}
       </div>
 
+      <div className="w-full flex justify-center py-10">
+        <div className="flex items-center gap-3">
+
+          {/* ACTIVE */}
+          <button className="w-11 h-11 bg-black text-white border rounded flex items-center justify-center">
+            1
+          </button>
+
+          {/* NORMAL */}
+          <button className="w-11 h-11 border rounded flex items-center justify-center hover:bg-black hover:text-white transition">
+            2
+          </button>
+
+          <button className="w-11 h-11 border rounded flex items-center justify-center hover:bg-black hover:text-white transition">
+            3
+          </button>
+
+          <button className="w-11 h-11 border rounded flex items-center justify-center hover:bg-black hover:text-white transition">
+            4
+          </button>
+
+          {/* NEXT */}
+          <button className="w-11 h-11 border rounded flex items-center justify-center hover:bg-black hover:text-white transition">
+            <i class="bi bi-caret-right-fill"></i>
+          </button>
+
+        </div>
+      </div>
+
       {/* Quick view popup - FIXED POSITION MODAL */}
       {activePopup && (
         <div
           className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
-          onClick={() => setActivePopup(null)}
-        >
+          onClick={() => setActivePopup(null)}>
           <div
             className="bg-white w-full max-w-4xl rounded-xl overflow-hidden relative"
-            onClick={(e) => e.stopPropagation()}
-          >
+            onClick={(e) => e.stopPropagation()}>
             {(() => {
               const product = products.find(p => p.id === activePopup);
               if (!product) return null;
@@ -430,64 +497,101 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                   <div className="grid grid-cols-1 md:grid-cols-2">
 
                     {/* ================= LEFT IMAGE ================= */}
-                    <div className="relative bg-gray-100 flex items-center justify-center">
-                      <img
-                        src={product.img1}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                      />
+                    <div className="relative bg-gray-100">
 
-                      {/* Arrows (optional UI) */}
-                      <button className="absolute left-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center">
-                        <i className="bi bi-arrow-left"></i>
-                      </button>
-                      <button className="absolute right-4 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center">
-                        <i className="bi bi-arrow-right"></i>
-                      </button>
+                      <Swiper
+                        modules={[Navigation, Pagination]}
+                        navigation
+                        pagination={{ clickable: true }}
+                        className="w-full h-full">
+
+                        {/* Main image */}
+                        <SwiperSlide>
+                          <div className="overflow-hidden">
+                            <img
+                              src={quickViewImage || product.img1}
+                              alt={product.name}
+                              className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                            />
+                          </div>
+                        </SwiperSlide>
+
+                        {/* Second image (if exists) */}
+                        {product.img2 && (
+                          <SwiperSlide>
+                            <div className="overflow-hidden">
+                              <img
+                                src={product.img2}
+                                alt={product.name}
+                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                              />
+                            </div>
+                          </SwiperSlide>
+                        )}
+
+                        {/* Color images */}
+                        {product.colorImages &&
+                          Object.values(product.colorImages).map((img, i) => (
+                            <SwiperSlide key={i}>
+                              <div className="overflow-hidden">
+                                <img
+                                  src={img}
+                                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                      </Swiper>
                     </div>
+
 
                     {/* ================= RIGHT INFO ================= */}
                     <div className="p-8 overflow-y-auto max-h-[90vh]">
 
-                      <h2 className="text-3xl font-semibold mb-2">{product.name}</h2>
+                      <h2 className="text-2xl font-semibold my-2">{product.name}</h2>
 
                       {/* Badge */}
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="border px-3 py-1 text-xs font-medium">BEST SELLER</span>
-                        <span className="text-red-500 text-sm flex items-center gap-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="border px-3 py-1 text-xs font-medium">BEST SELLER</p>
+                        <p className="text-red-500 text-sm flex items-center gap-1">
                           ⚡ Selling fast! 48 people have this in their carts.
-                        </span>
+                        </p>
                       </div>
 
-                      <p className="text-3xl font-bold mb-4">${product.price}</p>
+                      <p className="text-2xl font-bold">${product.price}</p>
 
-                      <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                      <p className="text-gray-500 text-sm leading-relaxed">
                         {product.description || "Premium quality product with modern design and perfect fitting."}
                       </p>
 
                       {/* ================= COLORS ================= */}
-                      <div className="mb-6">
-                        <p className="font-medium mb-2">Color:</p>
-                        <div className="flex gap-3">
-                          {product.colors?.map((c, i) => (
-                            <div
-                              key={i}
-                              className="w-8 h-8 rounded-full border-2 cursor-pointer"
-                              style={{ background: c }}
-                            ></div>
-                          ))}
-                        </div>
+                      <div className="flex gap-2">
+                        {product.colors?.map((c, i) => (
+                          <div
+                            key={i}
+                            className="w-6 h-6 rounded-full border-2 cursor-pointer hover:scale-110 transition"
+                            style={{ background: c }}
+                            onMouseEnter={() => {
+                              if (product.colorImages?.[c]) {
+                                setQuickViewImage(product.colorImages[c]);
+                              }
+                            }}
+                            onMouseLeave={() => {
+                              setQuickViewImage(null);
+                            }}
+                          ></div>
+                        ))}
                       </div>
 
+
                       {/* ================= SIZE ================= */}
-                      <div className="mb-6">
-                        <p className="font-medium mb-2">Size:</p>
-                        <div className="flex gap-3">
+                      <div className="my-2">
+                        <p className="font-semibold">Size:</p>
+                        <div className="flex gap-2">
                           {["S", "M", "L", "XL"].map((s) => (
                             <button
                               key={s}
-                              className="border px-4 py-2 hover:border-black"
-                            >
+                              className="border px-3 py-1 hover:border-black">
                               {s}
                             </button>
                           ))}
@@ -495,30 +599,35 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                       </div>
 
                       {/* ================= QTY ================= */}
-                      <div className="mb-8">
-                        <p className="font-medium mb-2">Quantity:</p>
+                      <div className="my-2">
+                        <p className="font-medium">Quantity:</p>
                         <div className="flex items-center border w-max">
                           <button className="px-4 py-2">-</button>
-                          <span className="px-6">1</span>
-                          <button className="px-4 py-2">+</button>
+                          <span className="">1</span>
+                          <button className="px-4">+</button>
                         </div>
                       </div>
 
                       {/* ================= ACTIONS ================= */}
-                      <div className="flex gap-3 mb-4">
+                      <div className="flex gap-2 my-2">
 
                         <button
-                          className="flex-1 bg-black text-white py-4 font-medium hover:bg-gray-800 transition"
+                          className="flex-1 bg-black text-white py-2 font-medium hover:bg-gray-800 transition"
                           onClick={() => {
                             addToCart(product);
                             setActivePopup(null);
-                          }}
-                        >
+                          }}>
                           Add to cart — ${product.price}
                         </button>
 
-                        <button className="w-14 border flex items-center justify-center text-xl">
-                          ❤
+                        <button
+                          className="w-14 border flex items-center justify-center text-xl hover:bg-black hover:text-white transition"
+                          onClick={() => toggleWishlist(product)}>
+                          <i
+                            className={`fa-heart ${isInWishlist(product.id)
+                                ? "fa-solid text-red-500"
+                                : "fa-regular"
+                              }`}></i>
                         </button>
 
                         <button className="w-14 border flex items-center justify-center text-xl">
@@ -528,7 +637,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                       </div>
 
                       {/* Paypal fake button */}
-                      <button className="w-full bg-yellow-400 py-4 font-semibold text-black">
+                      <button className="w-full bg-yellow-400 py-2 font-semibold text-black">
                         Buy with PayPal
                       </button>
 
@@ -675,6 +784,84 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
 
               <hr />
 
+              {/* BRAND */}
+              <div>
+                <p className="text-lg font-medium mb-3">Brand</p>
+                {["Ecomus", "M&H"].map((b) => (
+                  <label key={b} className="flex items-center gap-2 text-sm cursor-pointer mb-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.includes(b)}
+                      onChange={() => {
+                        const updated = selectedBrands.includes(b)
+                          ? selectedBrands.filter(x => x !== b)
+                          : [...selectedBrands, b];
+
+                        setSelectedBrands(updated);
+                        applyFilter(selectedCategory, inStockOnly, outStockOnly, price, updated, selectedColors, selectedSizes);
+                      }}
+                    />
+                    {b}
+                  </label>
+                ))}
+              </div>
+
+              <hr />
+
+              {/* COLOR */}
+              <div>
+                <p className="text-lg font-medium mb-3">Color</p>
+                <div className="space-y-3">
+                  {["beige", "black", "blue", "brown", "cream", "white", "violet", "orange", "pink"].map((c) => (
+                    <div
+                      key={c}
+                      className="flex items-center gap-3 cursor-pointer"
+                      onClick={() => {
+                        const updated = selectedColors.includes(c)
+                          ? selectedColors.filter(x => x !== c)
+                          : [...selectedColors, c];
+
+                        setSelectedColors(updated);
+                        applyFilter(selectedCategory, inStockOnly, outStockOnly, price, selectedBrands, updated, selectedSizes);
+                      }}
+                    >
+                      <span
+                        className={`w-5 h-5 rounded-full border ${selectedColors.includes(c) ? "ring-2 ring-black" : ""}`}
+                        style={{ background: c }}
+                      ></span>
+                      <span className="capitalize text-sm">{c}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <hr />
+
+              {/* SIZE */}
+              <div>
+                <p className="text-lg font-medium mb-3">Size</p>
+                {["S", "M", "L", "XL"].map((s) => (
+                  <label key={s} className="flex items-center gap-2 text-sm cursor-pointer mb-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedSizes.includes(s)}
+                      onChange={() => {
+                        const updated = selectedSizes.includes(s)
+                          ? selectedSizes.filter(x => x !== s)
+                          : [...selectedSizes, s];
+
+                        setSelectedSizes(updated);
+                        applyFilter(selectedCategory, inStockOnly, outStockOnly, price, selectedBrands, selectedColors, updated);
+                      }}
+                    />
+                    {s}
+                  </label>
+                ))}
+              </div>
+
+              <hr />
+
+
               <button
                 type="button"
                 onClick={() => {
@@ -683,12 +870,16 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                   setInStockOnly(false);
                   setOutStockOnly(false);
                   setPrice(500);
+                  setSelectedBrands([]);
+                  setSelectedColors([]);
+                  setSelectedSizes([]);
                   setIsFilterOpen(false);
                 }}
                 className="border w-full py-2 hover:bg-black hover:text-white transition"
               >
                 Clear Filters
               </button>
+
             </div>
           </div>
         </div>
