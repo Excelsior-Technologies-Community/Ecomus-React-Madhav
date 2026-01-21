@@ -215,6 +215,9 @@ const Products = [
 ];
 
 export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) {
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [qty, setQty] = useState(1);
 
   const [quickViewImage, setQuickViewImage] = useState(null);
 
@@ -231,8 +234,12 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
   const [activePopup, setActivePopup] = useState(null);
   const togglePopup = (id) => {
     setQuickViewImage(null);
+    setSelectedColor(null);
+    setSelectedSize(null);
+    setQty(1);
     setActivePopup(activePopup === id ? null : id);
   };
+
 
   const [hoverImage, setHoverImage] = useState({});
 
@@ -571,15 +578,12 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                             key={i}
                             className="w-6 h-6 rounded-full border-2 cursor-pointer hover:scale-110 transition"
                             style={{ background: c }}
-                            onMouseEnter={() => {
+                            onClick={() => {
+                              setSelectedColor(c);
                               if (product.colorImages?.[c]) {
                                 setQuickViewImage(product.colorImages[c]);
                               }
-                            }}
-                            onMouseLeave={() => {
-                              setQuickViewImage(null);
-                            }}
-                          ></div>
+                            }}></div>
                         ))}
                       </div>
 
@@ -590,10 +594,12 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                         <div className="flex gap-2">
                           {["S", "M", "L", "XL"].map((s) => (
                             <button
-                              key={s}
-                              className="border px-3 py-1 hover:border-black">
+                              onClick={() => setSelectedSize(s)}
+                              className={`border px-3 py-1
+                              ${selectedSize === s ? "border-black bg-black text-white" : "hover:border-black"}`}>
                               {s}
                             </button>
+
                           ))}
                         </div>
                       </div>
@@ -602,9 +608,13 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                       <div className="my-2">
                         <p className="font-medium">Quantity:</p>
                         <div className="flex items-center border w-max">
-                          <button className="px-4 py-2">-</button>
-                          <span className="">1</span>
-                          <button className="px-4">+</button>
+                          <button
+                            className="px-4 py-2"
+                            onClick={() => setQty(q => Math.max(1, q - 1))}>-</button>
+                          <span className="px-4">{qty}</span>
+                          <button
+                            className="px-4 py-2"
+                            onClick={() => setQty(q => q + 1)}>+</button>
                         </div>
                       </div>
 
@@ -614,7 +624,12 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                         <button
                           className="flex-1 bg-black text-white py-2 font-medium hover:bg-gray-800 transition"
                           onClick={() => {
-                            addToCart(product);
+                            addToCart({
+                              ...product,
+                              selectedColor,
+                              selectedSize,
+                              qty
+                            });
                             setActivePopup(null);
                           }}>
                           Add to cart — ${product.price}
@@ -625,8 +640,8 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
                           onClick={() => toggleWishlist(product)}>
                           <i
                             className={`fa-heart ${isInWishlist(product.id)
-                                ? "fa-solid text-red-500"
-                                : "fa-regular"
+                              ? "fa-solid text-red-500"
+                              : "fa-regular"
                               }`}></i>
                         </button>
 

@@ -4,7 +4,6 @@ export default function Footer() {
   const [showTop, setShowTop] = useState(false);
 
   const [openCurrency, setOpenCurrency] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -7,7 +7,6 @@ import Wishlist from "../Pages/Wishlist";
 
 function Header({ wishlistCount, cart, setCart }) {
   const [openCurrency, setOpenCurrency] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMagnifyOpen, setIsMagnifyOpen] = useState(false);
 
@@ -15,7 +14,7 @@ function Header({ wishlistCount, cart, setCart }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 120);
+      // Handle scroll logic if needed
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -145,7 +144,7 @@ function Header({ wishlistCount, cart, setCart }) {
 
               <Link to="/wishlist">
                 <button className="relative hover:text-red-600">
-                  <i class="fa-regular fa-heart text-dark"></i>
+                  <i className="fa-regular fa-heart text-dark"></i>
                   {wishlistCount > 0 && (
                     <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                       {wishlistCount}
@@ -155,7 +154,7 @@ function Header({ wishlistCount, cart, setCart }) {
               </Link>
 
               <button className="relative hover:text-red-600" onClick={() => setIsCartOpen(true)}>
-                <i class="fa-solid fa-bag-shopping"></i>
+                <i className="fa-solid fa-bag-shopping"></i>
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                   {cart.length}
                 </span>
@@ -399,11 +398,11 @@ function Header({ wishlistCount, cart, setCart }) {
         ></div>
 
         {/* Modal */}
-        <div className="absolute inset-0 flex items-center justify-center p-4">
+        <div className="absolute inset-0 flex items-center justify-center">
           <div className={`bg-white w-full max-w-xl rounded-lg shadow-lg transform transition-all duration-300 ${isLoginOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}>
 
             {/* Header */}
-            <div className="flex justify-between items-center p-6 border-b">
+            <div className="flex justify-between items-center pt-4 ps-4 pe-4 pb-0">
               <h3 className="text-xl font-semibold">Log in</h3>
               <button onClick={() => setIsLoginOpen(false)} className="text-2xl">✕</button>
             </div>
@@ -411,29 +410,21 @@ function Header({ wishlistCount, cart, setCart }) {
             {/* Body */}
             <div className="p-6 space-y-4">
 
-              <input
-                type="email"
-                placeholder="Email *"
-                className="w-full border px-4 py-3 rounded outline-none focus:border-black"
-              />
+              <input type="email" placeholder="Email *" className="w-full border px-4 py-2 rounded outline-none focus:border-black"/>
 
-              <input
-                type="password"
-                placeholder="Password *"
-                className="w-full border px-4 py-3 rounded outline-none focus:border-black"
-              />
+              <input type="password" placeholder="Password *" className="w-full border px-4 py-2 rounded outline-none focus:border-black"/>
 
               <div className="text-sm underline cursor-pointer text-gray-600">
                 Forgot your password?
               </div>
 
-              <button className="w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition">
+              <button className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
                 Log in
               </button>
 
               <div className="text-center text-sm mt-4">
                 <span className="underline cursor-pointer font-medium">
-                  New customer? Create your account ↗
+                  New customer? Create your account
                 </span>
               </div>
 
