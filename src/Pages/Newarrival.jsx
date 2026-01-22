@@ -314,9 +314,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
       </div>
 
       {/* PRODUCT GRID */}
-      <div
-        className={`max-w-7xl mx-auto p-6 grid gap-6 ${
-          activeGrid === 1
+      <div className={`max-w-7xl mx-auto p-6 grid gap-6 ${ activeGrid === 1
             ? "grid-cols-1"
             : activeGrid === 2
             ? "grid-cols-2"
@@ -327,8 +325,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
             : activeGrid === 5
             ? "grid-cols-5"
             : "grid-cols-6"
-        }`}
-      >
+        }`}>
         {products.map((p) => (
           <div key={p.id} className="group relative">
             {/* ================= GRID 1 SPECIAL LAYOUT ================= */}

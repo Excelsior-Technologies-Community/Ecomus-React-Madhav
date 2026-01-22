@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -10,8 +10,6 @@ import gram2 from "../assets/images/gallery-5.jpg";
 import gram3 from "../assets/images/gallery-6.jpg";
 import gram4 from "../assets/images/gallery-7.jpg";
 import gram5 from "../assets/images/gallery-8.jpg";
-
-
 
 function Home({ toggleWishlist, isInWishlist, addToCart }) {
   const swiperRef = useRef(null);
@@ -98,8 +96,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
         <div className="d-flex align-items-center gap-3 mb-4">
           <div
             className={`swiper-nav-btn ${isBeginning ? "disabled" : ""}`}
-            onClick={() => swiperRef.current?.slidePrev()}
-          >
+            onClick={() => swiperRef.current?.slidePrev()}>
             ←
           </div>
 
@@ -164,17 +161,17 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
       </div>
 
       {/* Best saller */}
-      <div className="container-fluid m-20">
+      <div className="container-fluid m-20" >
         <div className="container items-center text-center">
-          <h2 className='text-4xl font-normal py-2'>Best Sellers</h2>
-          <p>Shop the Latest Styles: Stay ahead of the curve with our newest arrivals</p>
+          <h2 className='text-4xl font-normal py-2' >Best Sellers</h2>
+          <p >Shop the Latest Styles: Stay ahead of the curve with our newest arrivals</p>
         </div>
       </div>
 
       <div className="container my-5">
         <div className="row g-4">
           {products.map((p) => (
-            <div key={p.id} className="col-6 col-md-4 col-lg-3">
+            <div key={p.id} className="col-6 col-md-4 col-lg-3" >
               {/* CARD */}
               <div className="product-card">
                 <div className="product-img">
