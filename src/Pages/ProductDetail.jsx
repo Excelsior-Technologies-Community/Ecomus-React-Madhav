@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ProductTabs from "../Components/ProductTabs";
 
 const product = {
     name: "Ribbed Tank Top",
@@ -128,9 +129,73 @@ export default function ProductDetail() {
                             More payment options
                         </p>
 
+                        {/* ================= EXTRA INFO SECTION ================= */}
+                        <div className="mt-8 space-y-6">
+
+                            {/* Top Actions */}
+                            <div className="flex flex-wrap items-center gap-6 text-sm text-gray-700">
+                                <button className="flex items-center gap-2 hover:text-black">
+                                    🎨 Compare color
+                                </button>
+                                <button className="flex items-center gap-2 hover:text-black">
+                                    ❓ Ask a question
+                                </button>
+                                <button className="flex items-center gap-2 hover:text-black">
+                                    🚚 Delivery & Return
+                                </button>
+                                <button className="flex items-center gap-2 hover:text-black">
+                                    🔗 Share
+                                </button>
+                            </div>
+
+                            {/* Info Boxes */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                {/* Delivery Box */}
+                                <div className="border rounded-lg p-5 flex gap-4 items-start">
+                                    <div className="text-3xl">📦</div>
+                                    <div className="text-sm text-gray-700">
+                                        <p>
+                                            Estimate delivery times:{" "}
+                                            <span className="font-semibold text-black">12–26 days</span> (International),
+                                            <span className="font-semibold text-black"> 3–6 days</span> (United States).
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Return Box */}
+                                <div className="border rounded-lg p-5 flex gap-4 items-start">
+                                    <div className="text-3xl">🔄</div>
+                                    <div className="text-sm text-gray-700">
+                                        <p>
+                                            Return within <span className="font-semibold text-black">30 days</span> of purchase.
+                                            <br />
+                                            Duties & taxes are non-refundable.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {/* Guarantee Safe Checkout */}
+                            <div>
+                                <p className="font-semibold mb-3">Guarantee Safe Checkout</p>
+
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <img src="/src/assets/images/visa.png" className="h-8" />
+                                    <img src="/src/assets/images/paypal.png" className="h-8" />
+                                    <img src="/src/assets/images/mastercard.png" className="h-8" />
+                                    <img src="/src/assets/images/amex.png" className="h-8" />
+                                    <img src="/src/assets/images/discover.png" className="h-8" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <ProductTabs />
+
         </>
     );
 }
