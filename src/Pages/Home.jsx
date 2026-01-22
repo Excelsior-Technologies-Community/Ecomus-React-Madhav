@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -168,6 +168,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
         </div>
       </div>
 
+      <Link to="/productdetail" className="no-underline text-black">
       <div className="container my-5">
         <div className="row g-4">
           {products.map((p) => (
@@ -212,6 +213,9 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           ))}
         </div>
       </div>
+      </Link>
+
+      {/* ================= SHOP THE LOOK SECTION ================= */}
 
       <div className="w-full">
 

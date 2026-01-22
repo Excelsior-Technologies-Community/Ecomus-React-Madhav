@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -314,6 +315,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
       </div>
 
       {/* PRODUCT GRID */}
+      <Link to="/productdetail" className="no-underline text-black">
       <div className={`max-w-7xl mx-auto p-6 grid gap-6 ${ activeGrid === 1
             ? "grid-cols-1"
             : activeGrid === 2
@@ -504,6 +506,7 @@ export default function Newarrival({ addToCart, toggleWishlist, isInWishlist }) 
           </div>
         ))}
       </div>
+      </Link>
 
       <div className="w-full flex justify-center py-10">
         <div className="flex items-center gap-3">

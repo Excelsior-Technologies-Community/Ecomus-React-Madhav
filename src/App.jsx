@@ -5,6 +5,7 @@ import Home from './Pages/Home.jsx';
 import Wishlist from './Pages/Wishlist.jsx';
 import Collection from './Pages/Collection.jsx';
 import Newarrival from './Pages/Newarrival.jsx';
+import ProductDetail from './Pages/ProductDetail.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -110,6 +111,8 @@ function App() {
             />
           }
         />
+
+        <Route path='/productdetail' element={<ProductDetail />} />
 
       </Routes>
       <Footer />
