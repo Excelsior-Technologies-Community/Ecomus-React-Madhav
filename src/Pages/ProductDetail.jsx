@@ -36,18 +36,15 @@ export default function ProductDetail() {
                                     key={i}
                                     src={img}
                                     onClick={() => setActiveImage(img)}
-                                    className={`w-20 h-24 object-cover rounded cursor-pointer border ${activeImage === img ? "border-black" : "border-gray-200"
-                                        }`}
-                                />
+                                    className={`w-20 h-24 object-cover rounded cursor-pointer border ${activeImage === img ? "border-black" : "border-gray-200"}`} />
                             ))}
                         </div>
 
                         {/* Main Image */}
-                        <div className="flex-1 bg-gray-100 rounded-xl overflow-hidden">
+                        <div className="flex-1 bg-gray-100 rounded-xl overflow-hidden h-[600px]">
                             <img
                                 src={activeImage}
-                                className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                            />
+                                className="w-full h-full object-cover hover:scale-105 transition duration-500" />
                         </div>
                     </div>
 
@@ -81,10 +78,8 @@ export default function ProductDetail() {
                                     <div
                                         key={i}
                                         onClick={() => setSelectedColor(i)}
-                                        className={`w-8 h-8 rounded-full border-2 cursor-pointer ${selectedColor === i ? "ring-2 ring-black" : ""
-                                            }`}
-                                        style={{ background: c }}
-                                    />
+                                        className={`w-8 h-8 rounded-full border-2 cursor-pointer ${selectedColor === i ? "ring-2 ring-black" : ""}`}
+                                        style={{ background: c }} />
                                 ))}
                             </div>
                         </div>
