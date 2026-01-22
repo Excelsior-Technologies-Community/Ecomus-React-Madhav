@@ -272,5 +272,39 @@
   transition: all 0.3s ease;
 }
 
+/* New Arrival Css  */
+.product-img1 {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  object-fit: cover;
+}
 
+.product-img1 img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+
+/* Default state */
+.product-img1 .img-main1 {
+  opacity: 1;
+}
+
+.product-img1 .img-hover1 {
+  opacity: 0;
+}
+
+/* On hover swap */
+.group:hover .product-img1 .img-main1 {
+  opacity: 0;
+}
+
+.group:hover .product-img1 .img-hover1 {
+  opacity: 1;
+}
 
