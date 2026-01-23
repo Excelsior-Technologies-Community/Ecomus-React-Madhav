@@ -112,7 +112,7 @@ function App() {
           }
         />
 
-        <Route path='/productdetail' element={<ProductDetail />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
 
       </Routes>
       <Footer />
