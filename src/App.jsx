@@ -7,12 +7,14 @@ import Collection from './Pages/Collection.jsx';
 import Newarrival from './Pages/Newarrival.jsx';
 import ProductDetail from './Pages/ProductDetail.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
 
 function App() {
   const [wishlist, setWishlist] = useState([]);
   const [cart, setCart] = useState([]);
 
-  // 🔁 Load wishlist
+  // 📖 Load wishlist
   useEffect(() => {
     const saved = localStorage.getItem("wishlist");
     if (saved) setWishlist(JSON.parse(saved));
@@ -23,7 +25,7 @@ function App() {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
-  // 🔁 Load cart
+  // 📖 Load cart
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) setCart(JSON.parse(savedCart));
@@ -63,12 +65,12 @@ function App() {
       if (existing) {
         return prev.map(item =>
           item.id === product.id
-            ? { ...item, qty: item.qty + 1 }
+            ? { ...item, qty: item.qty + (product.qty || 1) }
             : item
         );
       }
 
-      return [...prev, { ...product, qty: 1 }];
+      return [...prev, { ...product, qty: product.qty || 1 }];
     });
   };
 
@@ -100,7 +102,7 @@ function App() {
         />
 
         <Route path="/collection" element={<Collection />} />
-        
+
         <Route
           path="/newarrival"
           element={
@@ -112,9 +114,18 @@ function App() {
           }
         />
 
-        <Route path='/product/:id' element={<ProductDetail />} />
-
+        <Route 
+          path='/product/:id' 
+          element={
+            <ProductDetail
+              addToCart={addToCart}
+              toggleWishlist={toggleWishlist}
+              isInWishlist={isInWishlist} 
+            />
+          } 
+        />
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );
