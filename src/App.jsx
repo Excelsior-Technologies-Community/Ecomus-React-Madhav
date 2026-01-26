@@ -60,20 +60,21 @@ function App() {
 
   // 🛒 Add to cart
   const addToCart = (product) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.id === product.id);
+  setCart(prev => {
+    const existing = prev.find(item => item.id === product.id);
 
-      if (existing) {
-        return prev.map(item =>
-          item.id === product.id
-            ? { ...item, qty: item.qty + (product.qty || 1) }
-            : item
-        );
-      }
+    if (existing) {
+      return prev.map(item =>
+        item.id === product.id
+          ? { ...item, qty: item.qty + (product.qty || 1) }
+          : item
+      );
+    }
 
-      return [...prev, { ...product, qty: product.qty || 1 }];
-    });
-  };
+    return [...prev, { ...product, qty: product.qty || 1 }];
+  });
+};
+
 
   return (
     <BrowserRouter>
@@ -90,7 +91,7 @@ function App() {
 
         <Route path='/product/:id' element={<ProductDetail addToCart={addToCart} toggleWishlist={toggleWishlist} isInWishlist={isInWishlist} />} />
         
-        <Route path="/shoppingcart" element={<Shoppingcart cart={cart} setCart={setCart} />} />
+        <Route path="/shoppingcart" element={<Shoppingcart cart={cart} setCart={setCart} isInWishlist={isInWishlist} addToCart={addToCart}/>} />
       </Routes>
 
 

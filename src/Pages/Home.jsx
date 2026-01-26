@@ -183,8 +183,8 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
 
                     {/* ACTIONS */}
                     <div className="product-actions">
-                      <div 
-                        className="action-btn" 
+                      <div
+                        className="action-btn"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -194,8 +194,8 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                         <i className="fa-solid fa-cart-plus"></i>
                       </div>
 
-                      <div 
-                        className="action-btn" 
+                      <div
+                        className="action-btn"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -205,7 +205,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                         <i className={`fa-heart ${isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
                       </div>
 
-                      <div 
+                      <div
                         className="action-btn"
                         onClick={(e) => {
                           e.preventDefault();
@@ -215,7 +215,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                         <i className="fa-solid fa-code-compare"></i>
                       </div>
 
-                      <div 
+                      <div
                         className="action-btn"
                         onClick={(e) => {
                           e.preventDefault();

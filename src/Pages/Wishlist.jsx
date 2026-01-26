@@ -19,7 +19,16 @@ export default function Wishlist({ wishlist, removeFromWishlist, addToCart }) {
 
                     <div className="product-actions">
                       {/* 🛒 ADD TO CART */}
-                      <div className="action-btn" onClick={() => addToCart(p)}>
+                      <div className="action-btn" onClick={() => addToCart({
+                        ...p,
+                        selectedColor: p.colors[0],
+                        selectedSize: p.sizes[0],
+                        qty: 1,
+                        images: {
+                          [p.colors[0]]: p.img1
+                        }
+                      })}
+                      >
                         <i className="fa-solid fa-cart-plus"></i>
                       </div>
 
