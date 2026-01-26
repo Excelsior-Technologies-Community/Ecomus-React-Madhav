@@ -7,6 +7,7 @@ import Collection from './Pages/Collection.jsx';
 import Newarrival from './Pages/Newarrival.jsx';
 import ProductDetail from './Pages/ProductDetail.jsx';
 import Shoppingcart from './Pages/Shoppingcart.jsx';
+import Checkout from './Pages/Checkout.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -60,20 +61,32 @@ function App() {
 
   // 🛒 Add to cart
   const addToCart = (product) => {
-  setCart(prev => {
-    const existing = prev.find(item => item.id === product.id);
+    const newItem = {
+      id: `${product.id}-${product.selectedColor || "default"}-${product.selectedSize || "default"}`,
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      img: product.images?.[product.selectedColor] || product.img1 || product.img,
+      color: product.selectedColor || "default",
+      size: product.selectedSize || "default",
+      qty: product.qty || 1,
+    };
 
-    if (existing) {
-      return prev.map(item =>
-        item.id === product.id
-          ? { ...item, qty: item.qty + (product.qty || 1) }
-          : item
-      );
-    }
+    setCart(prev => {
+      const existing = prev.find(item => item.id === newItem.id);
 
-    return [...prev, { ...product, qty: product.qty || 1 }];
-  });
-};
+      if (existing) {
+        return prev.map(item =>
+          item.id === newItem.id
+            ? { ...item, qty: item.qty + newItem.qty }
+            : item
+        );
+      }
+
+      return [...prev, newItem];
+    });
+  };
+
 
 
   return (
@@ -90,8 +103,10 @@ function App() {
         <Route path="/newarrival" element={<Newarrival addToCart={addToCart} isInWishlist={isInWishlist} />} />
 
         <Route path='/product/:id' element={<ProductDetail addToCart={addToCart} toggleWishlist={toggleWishlist} isInWishlist={isInWishlist} />} />
+
+        <Route path="/shoppingcart" element={<Shoppingcart cart={cart} setCart={setCart} addToCart={addToCart} wishlist={wishlist} setWishlist={setWishlist}/>} />
         
-        <Route path="/shoppingcart" element={<Shoppingcart cart={cart} setCart={setCart} isInWishlist={isInWishlist} addToCart={addToCart}/>} />
+        <Route path="/checkout" element={<Checkout cart={cart} />}/>
       </Routes>
 
 

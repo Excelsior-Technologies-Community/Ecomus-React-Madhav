@@ -26,17 +26,14 @@ export default function Wishlist({ wishlist, removeFromWishlist, addToCart }) {
                         qty: 1,
                         images: {
                           [p.colors[0]]: p.img1
-                        }
-                      })}
-                      >
+                        }})}>
                         <i className="fa-solid fa-cart-plus"></i>
                       </div>
 
                       {/* 🗑️ REMOVE */}
                       <div
                         className="action-btn"
-                        onClick={() => removeFromWishlist(p.id)}
-                      >
+                        onClick={() => removeFromWishlist(p.id)}>
                         <i className="fa-solid fa-trash"></i>
                       </div>
                     </div>

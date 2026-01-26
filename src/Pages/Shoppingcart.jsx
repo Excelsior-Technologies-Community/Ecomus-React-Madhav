@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function Shoppingcart({ cart, setCart }) {
-
+export default function Shoppingcart({ cart, setCart, addToCart, wishlist, setWishlist }) {
     const removeItem = (id) => {
         setCart(cart.filter((i) => i.id !== id));
     };
-
 
     const updateQty = (id, newQty) => {
         if (newQty < 1) {
@@ -21,8 +20,6 @@ export default function Shoppingcart({ cart, setCart }) {
             prev.map(i => i.id === id ? { ...i, qty: newQty } : i)
         );
     };
-
-
 
     const subtotal = cart.reduce(
         (sum, i) => sum + i.price * i.qty,
@@ -114,43 +111,12 @@ export default function Shoppingcart({ cart, setCart }) {
     ];
 
     // ================= STATES =================
-    const [hovered, setHovered] = useState(null);
-    const [quickView, setQuickView] = useState(null);
-    const [wishlist, setWishlist] = useState([]);
-
     const [activeColor, setActiveColor] = useState({});
     const [qvColor, setQvColor] = useState(null);
     const [qvSize, setQvSize] = useState("M");
     const [qvQty, setQvQty] = useState(1);
-
-    // ================= HELPER FUNCTIONS =================
-    const addToCart = (product) => {
-        const newItem = {
-            id: `${product.id}-${product.selectedColor}-${product.selectedSize}`,
-            productId: product.id,
-            name: product.name,
-            price: product.price,
-            img: product.images[product.selectedColor],
-            color: product.selectedColor,
-            size: product.selectedSize,
-            qty: product.qty || 1,
-        };
-
-        setCart(prev => {
-            const existing = prev.find(item => item.id === newItem.id);
-
-            if (existing) {
-                return prev.map(item =>
-                    item.id === newItem.id
-                        ? { ...item, qty: item.qty + newItem.qty }
-                        : item
-                );
-            }
-
-            return [...prev, newItem];
-        });
-    };
-
+    const [hovered, setHovered] = useState(null);
+    const [quickView, setQuickView] = useState(null);
 
     const toggleWishlist = (product) => {
         const exists = wishlist.find(item => item.id === product.id);
@@ -161,9 +127,9 @@ export default function Shoppingcart({ cart, setCart }) {
         }
     };
 
-    const isInWishlist = (productId) => {
-        return wishlist.some(item => item.id === productId);
-    };
+    const isInWishlist = (id) => wishlist.some(item => item.id === id);
+
+
 
 
     return (
@@ -321,7 +287,7 @@ export default function Shoppingcart({ cart, setCart }) {
                                 </div>
 
                                 <button className="w-full bg-black text-white py-3 rounded mb-3 hover:bg-gray-800">
-                                    Check out
+                                    <Link to="/checkout" className='text-white no-underline'>Check out</Link>
                                 </button>
                                 <p className="text-center font-semibold mb-2 text-sm">Guarantee Safe Checkout</p>
                             </div>
@@ -541,28 +507,23 @@ export default function Shoppingcart({ cart, setCart }) {
                                             <img
                                                 src={p.images[currentColor]}
                                                 className="w-full h-[420px] object-cover transition-all duration-500"
-                                                alt={p.name}
-                                            />
+                                                alt={p.name} />
 
                                             {/* ================= HOVER ACTIONS ================= */}
                                             <div
                                                 className={`absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 transition-all duration-300
                                                 ${hovered === p.id ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
-                                            `}
-                                            >
+                                            `}>
                                                 {/* ADD TO CART */}
                                                 <button
-                                                    onClick={() =>
-                                                        addToCart({
-                                                            ...p,
-                                                            selectedColor: currentColor,
-                                                            selectedSize: p.sizes[0],
-                                                            qty: 1,
-                                                        })
-                                                    }
+                                                    onClick={() => addToCart({
+                                                        ...p,
+                                                        selectedColor: currentColor,
+                                                        selectedSize: p.sizes[0],
+                                                        qty: 1,
+                                                    })}
                                                     className="w-11 h-11 bg-gray-50 text-gray-950 rounded-lg shadow flex items-center justify-center hover:bg-gray-950 hover:text-white transition-all duration-200 cursor-pointer"
-                                                    title="Add to Cart"
-                                                >
+                                                    title="Add to Cart">
                                                     🛒
                                                 </button>
 
@@ -731,15 +692,13 @@ export default function Shoppingcart({ cart, setCart }) {
                                                     qty: qvQty,
                                                 });
                                                 setQuickView(null);
-                                            }}
-                                        >
+                                            }}>
                                             Add to Cart — ${(quickView.price * qvQty).toFixed(2)}
                                         </button>
 
                                         <button
                                             className="w-14 border rounded hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center"
-                                            onClick={() => toggleWishlist(quickView)}
-                                        >
+                                            onClick={() => toggleWishlist(quickView)}>
                                             {isInWishlist(quickView.id) ? "❤️" : "🤍"}
                                         </button>
                                     </div>
