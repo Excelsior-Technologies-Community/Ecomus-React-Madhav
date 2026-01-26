@@ -286,8 +286,10 @@ export default function Shoppingcart({ cart, setCart, addToCart, wishlist, setWi
                                     </label>
                                 </div>
 
-                                <button className="w-full bg-black text-white py-3 rounded mb-3 hover:bg-gray-800">
-                                    <Link to="/checkout" className='text-white no-underline'>Check out</Link>
+                                <button className="w-full bg-black text-white rounded mb-3 hover:bg-gray-800">
+                                    <Link to="/checkout" className="block text-center bg-black text-white py-2 no-underline rounded">
+                                        Check out
+                                    </Link>
                                 </button>
                                 <p className="text-center font-semibold mb-2 text-sm">Guarantee Safe Checkout</p>
                             </div>

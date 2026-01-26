@@ -1,15 +1,32 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import products from '../Data/Product';
 import categories from '../Data/Categories';
+
+// Import all images
+import slideshow1 from "../assets/images/fashion-slideshow-01.jpg";
+import slideshow2 from "../assets/images/fashion-slideshow-02.jpg";
+import slideshow3 from "../assets/images/fashion-slideshow-03.jpg";
 import gram1 from "../assets/images/gallery-3.jpg";
 import gram2 from "../assets/images/gallery-5.jpg";
 import gram3 from "../assets/images/gallery-6.jpg";
 import gram4 from "../assets/images/gallery-7.jpg";
 import gram5 from "../assets/images/gallery-8.jpg";
+import lookbook3 from "../assets/images/imgi_67_lookbook-3.jpg";
+import lookbook4 from "../assets/images/imgi_70_lookbook-4.jpg";
+import imgP2 from "../assets/images/imgi_68_img-p2.jpeg";
+import imgP4 from "../assets/images/imgi_69_img-p4.jpeg";
+import imgP5 from "../assets/images/imgi_71_img-p5.jpeg";
+import imgP3 from "../assets/images/imgi_72_img-p3.jpeg";
+import brand01 from "../assets/images/brand-01.png";
+import brand02 from "../assets/images/brand-02.png";
+import brand03 from "../assets/images/brand-03.png";
+import brand04 from "../assets/images/brand-04.png";
+import brand05 from "../assets/images/brand-05.png";
+import brand06 from "../assets/images/brand-06.png";
 
 function Home({ toggleWishlist, isInWishlist, addToCart }) {
   const swiperRef = useRef(null);
@@ -22,7 +39,6 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
   }
 
   const navigate = useNavigate();
-
 
   return (
     <>
@@ -40,7 +56,9 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper">
         <SwiperSlide>
-          <div className="container-fluid bg-[url(../src/assets/images/fashion-slideshow-01.jpg)] h-[600px] bg-cover bg-center bg-no-repeat flex">
+          <div 
+            className="container-fluid h-[600px] bg-cover bg-center bg-no-repeat flex"
+            style={{ backgroundImage: `url(${slideshow1})` }}>
             <div className="container py-5 my-auto text-black">
               <h1 className='text-[90px] font-normal'>Glamorous <br /> Glam</h1>
               <p className='text-2xl py-3'>From casual to formal, we've got you covered</p>
@@ -49,7 +67,9 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="container-fluid bg-[url(../src/assets/images/fashion-slideshow-02.jpg)] h-[600px] bg-cover bg-center flex items-center">
+          <div 
+            className="container-fluid h-[600px] bg-cover bg-center flex items-center"
+            style={{ backgroundImage: `url(${slideshow2})` }}>
             <div className="container">
               <h1 className='text-[90px] font-normal'>Glamorous <br /> Glam</h1>
               <p className='text-2xl py-3'>From casual to formal, we've got you covered</p>
@@ -58,7 +78,9 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="container-fluid bg-[url(../src/assets/images/fashion-slideshow-03.jpg)] h-[600px] bg-cover bg-center flex items-center">
+          <div 
+            className="container-fluid h-[600px] bg-cover bg-center flex items-center"
+            style={{ backgroundImage: `url(${slideshow3})` }}>
             <div className="container">
               <h1 className='text-[90px] font-normal'>Simple <br /> Style</h1>
               <p className='text-2xl py-3'>From casual to formal, we've got you covered</p>
@@ -156,11 +178,10 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             </div>
           </div>
 
-
         </div>
       </div>
 
-      {/* Best saller */}
+      {/* Best seller */}
       <div className="container-fluid m-20" >
         <div className="container items-center text-center">
           <h2 className='text-4xl font-normal py-2' >Best Sellers</h2>
@@ -261,7 +282,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           {/* LEFT IMAGE */}
           <div className="relative">
             <img
-              src="../src/assets/images/imgi_67_lookbook-3.jpg"
+              src={lookbook3}
               className="w-full h-full object-cover"
               alt=""
             />
@@ -275,7 +296,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 1 && (
               <div className="absolute top-[30%] left-[40%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="w-10 h-10 object-cover" alt="" />
+                  <img src={imgP2} className="w-10 h-10 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Ribbed modal T-shirt</p>
                     <p className="font-semibold p-0 m-1">$20.00</p>
@@ -293,7 +314,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 2 && (
               <div className="absolute top-[55%] left-[55%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="w-10 h-10 object-cover" alt="" />
+                  <img src={imgP4} className="w-10 h-10 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Necklace</p>
                     <p className="font-semibold p-0 m-1">$15.00</p>
@@ -306,7 +327,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           {/* RIGHT IMAGE */}
           <div className="relative">
             <img
-              src="../src/assets/images/imgi_70_lookbook-4.jpg"
+              src={lookbook4}
               className="w-full h-full object-cover"
               alt=""
             />
@@ -320,7 +341,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 3 && (
               <div className="absolute top-[20%] left-[40%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="w-14 h-14 object-cover" alt="" />
+                  <img src={imgP5} className="w-14 h-14 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Summer Hat</p>
                     <p className="font-semibold p-0 m-1">$25.00</p>
@@ -386,7 +407,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 </div>
                 <hr className='border border-black' />
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_72_img-p3.jpeg" className="rounded" width="64" height="64" alt="" />
+                  <img src={imgP3} className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Jersey thong body</div>
                     <div className="fw-semibold">$105.95</div>
@@ -413,7 +434,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 </div>
                 <hr className='border border-black' />
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="rounded" width="64" height="64" alt="" />
+                  <img src={imgP4} className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Cotton jersey top</div>
                     <div className="fw-semibold">$7.95</div>
@@ -443,7 +464,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 <hr className='border border-black' />
 
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="rounded" width="64" height="64" alt="" />
+                  <img src={imgP5} className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Ribbed modal T-shirt</div>
                     <div className="fw-semibold">From $18.95</div>
@@ -472,7 +493,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 <hr className='border border-black' />
 
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="rounded" width="64" height="64" alt="" />
+                  <img src={imgP2} className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Premium Summer Top</div>
                     <div className="fw-semibold">$29.95</div>
@@ -495,27 +516,27 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
           <div className="row g-0 text-center align-items-center">
 
             <div className="col-6 col-md-4 col-lg-2 border-end py-4">
-              <img src="../src/assets/images/brand-01.png" className="img-fluid brand-logo" alt="SSENSE" />
+              <img src={brand01} className="img-fluid brand-logo" alt="SSENSE" />
             </div>
 
             <div className="col-6 col-md-4 col-lg-2 border-end py-4">
-              <img src="../src/assets/images/brand-02.png" className="img-fluid brand-logo" alt="Burberry" />
+              <img src={brand02} className="img-fluid brand-logo" alt="Burberry" />
             </div>
 
             <div className="col-6 col-md-4 col-lg-2 border-end py-4">
-              <img src="../src/assets/images/brand-03.png" className="img-fluid brand-logo" alt="Nike" />
+              <img src={brand03} className="img-fluid brand-logo" alt="Nike" />
             </div>
 
             <div className="col-6 col-md-4 col-lg-2 border-end py-4">
-              <img src="../src/assets/images/brand-04.png" className="img-fluid brand-logo" alt="Asos" />
+              <img src={brand04} className="img-fluid brand-logo" alt="Asos" />
             </div>
 
             <div className="col-6 col-md-4 col-lg-2 border-end py-4">
-              <img src="../src/assets/images/brand-05.png" className="img-fluid brand-logo" alt="Pull & Bear" />
+              <img src={brand05} className="img-fluid brand-logo" alt="Pull & Bear" />
             </div>
 
             <div className="col-6 col-md-4 col-lg-2 py-4">
-              <img src="../src/assets/images/brand-06.png" className="img-fluid brand-logo" alt="Gildan" />
+              <img src={brand06} className="img-fluid brand-logo" alt="Gildan" />
             </div>
           </div>
         </div>

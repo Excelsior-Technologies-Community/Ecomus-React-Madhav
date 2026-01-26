@@ -1,42 +1,50 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+// Import collection images
+import collection14 from "../assets/images/collection-14.jpg";
+import collection9 from "../assets/images/collection-9.jpg";
+import collection10 from "../assets/images/collection-10.jpg";
+import collection11 from "../assets/images/collection-11.jpg";
+import collection12 from "../assets/images/collection-12.jpg";
+import collection13 from "../assets/images/collection-13.jpg";
+
 export default function Categories() {
   const categories = [
     {
       id: 1,
       title: "Women",
-      image: "/src/assets/images/collection-14.jpg",
+      image: collection14,
       bg: "bg-[#f8f8ec]",
     },
     {
       id: 2,
       title: "Women",
-      image: "/src/assets/images/collection-9.jpg",
+      image: collection9,
       bg: "bg-[#e6dfd9]",
     },
     {
       id: 3,
       title: "Women",
-      image: "/src/assets/images/collection-10.jpg",
+      image: collection10,
       bg: "bg-[#ececea]",
     },
     {
       id: 4,
       title: "Women",
-      image: "/src/assets/images/collection-11.jpg",
+      image: collection11,
       bg: "bg-[#f4f4f4]",
     },
     {
       id: 5,
       title: "Women",
-      image: "/src/assets/images/collection-12.jpg",
+      image: collection12,
       bg: "bg-[#f4f4f4]",
     },
     {
       id: 6,
       title: "Women",
-      image: "/src/assets/images/collection-13.jpg",
+      image: collection13,
       bg: "bg-[#efe6dd]",
     },
   ];
@@ -95,7 +103,7 @@ export default function Categories() {
 
           {/* NEXT */}
           <button className="w-11 h-11 border rounded flex items-center justify-center hover:bg-black hover:text-white transition">
-            <i class="bi bi-caret-right-fill"></i>
+            <i className="bi bi-caret-right-fill"></i>
           </button>
 
         </div>
