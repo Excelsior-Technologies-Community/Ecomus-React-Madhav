@@ -6,6 +6,7 @@ import Wishlist from './Pages/Wishlist.jsx';
 import Collection from './Pages/Collection.jsx';
 import Newarrival from './Pages/Newarrival.jsx';
 import ProductDetail from './Pages/ProductDetail.jsx';
+import Shoppingcart from './Pages/Shoppingcart.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -79,52 +80,19 @@ function App() {
       <Header wishlistCount={wishlist.length} cart={cart} setCart={setCart} />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              toggleWishlist={toggleWishlist}
-              isInWishlist={isInWishlist}
-              addToCart={addToCart}
-            />
-          }
-        />
+        <Route path="/" element={<Home toggleWishlist={toggleWishlist} isInWishlist={isInWishlist} addToCart={addToCart} />} />
 
-        <Route
-          path="/wishlist"
-          element={
-            <Wishlist
-              wishlist={wishlist}
-              removeFromWishlist={removeFromWishlist}
-              addToCart={addToCart}
-            />
-          }
-        />
+        <Route path="/wishlist" element={<Wishlist wishlist={wishlist} removeFromWishlist={removeFromWishlist} addToCart={addToCart} />} />
 
         <Route path="/collection" element={<Collection />} />
 
-        <Route
-          path="/newarrival"
-          element={
-            <Newarrival
-              addToCart={addToCart}
-              toggleWishlist={toggleWishlist}
-              isInWishlist={isInWishlist}
-            />
-          }
-        />
+        <Route path="/newarrival" element={<Newarrival addToCart={addToCart} isInWishlist={isInWishlist} />} />
 
-        <Route 
-          path='/product/:id' 
-          element={
-            <ProductDetail
-              addToCart={addToCart}
-              toggleWishlist={toggleWishlist}
-              isInWishlist={isInWishlist} 
-            />
-          } 
-        />
+        <Route path='/product/:id' element={<ProductDetail addToCart={addToCart} toggleWishlist={toggleWishlist} isInWishlist={isInWishlist} />} />
+        
+        <Route path="/shoppingcart" element={<Shoppingcart cart={cart} setCart={setCart} />} />
       </Routes>
+
 
       <Footer />
     </BrowserRouter>

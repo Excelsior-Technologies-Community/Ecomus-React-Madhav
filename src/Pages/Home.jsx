@@ -168,52 +168,80 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
         </div>
       </div>
 
-      <Link to="/productdetail" className="no-underline text-black">
+      {/* PRODUCTS GRID - FIXED SECTION */}
       <div className="container my-5">
         <div className="row g-4">
           {products.map((p) => (
-            <div key={p.id} className="col-6 col-md-4 col-lg-3" >
-              {/* CARD */}
-              <div className="product-card">
-                <div className="product-img">
-                  <img src={p.img1} className="img-1" alt="" />
-                  <img src={p.img2} className="img-2" alt="" />
+            <div key={p.id} className="col-6 col-md-4 col-lg-3">
+              {/* Wrap each product card with Link */}
+              <Link to={`/product/${p.id}`} className="no-underline text-black">
+                {/* CARD */}
+                <div className="product-card">
+                  <div className="product-img">
+                    <img src={p.img1} className="img-1" alt={p.name} />
+                    <img src={p.img2} className="img-2" alt={p.name} />
 
-                  {/* ACTIONS */}
-                  <div className="product-actions">
-                    <div className="action-btn" onClick={() => addToCart(p)}>
-                      <i className="fa-solid fa-cart-plus"></i>
-                    </div>
+                    {/* ACTIONS */}
+                    <div className="product-actions">
+                      <div 
+                        className="action-btn" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          addToCart(p);
+                        }}
+                      >
+                        <i className="fa-solid fa-cart-plus"></i>
+                      </div>
 
-                    <div className="action-btn" onClick={() => toggleWishlist(p)}>
-                      <i className={`fa-heart ${isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
-                    </div>
+                      <div 
+                        className="action-btn" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleWishlist(p);
+                        }}
+                      >
+                        <i className={`fa-heart ${isInWishlist(p.id) ? "fa-solid text-danger" : "fa-regular"}`}></i>
+                      </div>
 
-                    <div className="action-btn">
-                      <i className="fa-solid fa-code-compare"></i>
-                    </div>
+                      <div 
+                        className="action-btn"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                      >
+                        <i className="fa-solid fa-code-compare"></i>
+                      </div>
 
-                    <div className="action-btn">
-                      <i className="fa-regular fa-eye"></i>
+                      <div 
+                        className="action-btn"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                      >
+                        <i className="fa-regular fa-eye"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* INFO */}
-              <h6 className="mt-3 mb-1">{p.name}</h6>
-              <p className="fw-bold mb-1">${p.price}</p>
-              {/* COLORS */}
-              <div className="d-flex gap-2">
-                {p.colors.map((c, i) => (
-                  <span key={i} className="color-dot" style={{ background: c }}></span>
-                ))}
-              </div>
+                {/* INFO */}
+                <h6 className="mt-3 mb-1">{p.name}</h6>
+                <p className="fw-bold mb-1">${p.price}</p>
+                {/* COLORS */}
+                <div className="d-flex gap-2">
+                  {p.colors.map((c, i) => (
+                    <span key={i} className="color-dot" style={{ background: c }}></span>
+                  ))}
+                </div>
+              </Link>
             </div>
           ))}
         </div>
       </div>
-      </Link>
 
       {/* ================= SHOP THE LOOK SECTION ================= */}
 
@@ -247,7 +275,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 1 && (
               <div className="absolute top-[30%] left-[40%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="w-10 h-10 object-cover" />
+                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="w-10 h-10 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Ribbed modal T-shirt</p>
                     <p className="font-semibold p-0 m-1">$20.00</p>
@@ -265,7 +293,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 2 && (
               <div className="absolute top-[55%] left-[55%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="w-10 h-10 object-cover" />
+                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="w-10 h-10 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Necklace</p>
                     <p className="font-semibold p-0 m-1">$15.00</p>
@@ -292,7 +320,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
             {activePopup === 3 && (
               <div className="absolute top-[20%] left-[40%] bg-white shadow-lg p-1 rounded-md w-64 z-50">
                 <div className="flex gap-3 items-center">
-                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="w-14 h-14 object-cover" />
+                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="w-14 h-14 object-cover" alt="" />
                   <div>
                     <p className="font-medium p-0 m-1">Summer Hat</p>
                     <p className="font-semibold p-0 m-1">$25.00</p>
@@ -358,7 +386,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 </div>
                 <hr className='border border-black' />
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_72_img-p3.jpeg" className="rounded" width="64" height="64" />
+                  <img src="../src/assets/images/imgi_72_img-p3.jpeg" className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Jersey thong body</div>
                     <div className="fw-semibold">$105.95</div>
@@ -385,7 +413,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 </div>
                 <hr className='border border-black' />
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="rounded" width="64" height="64" />
+                  <img src="../src/assets/images/imgi_69_img-p4.jpeg" className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Cotton jersey top</div>
                     <div className="fw-semibold">$7.95</div>
@@ -415,7 +443,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 <hr className='border border-black' />
 
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="rounded" width="64" height="64" />
+                  <img src="../src/assets/images/imgi_71_img-p5.jpeg" className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Ribbed modal T-shirt</div>
                     <div className="fw-semibold">From $18.95</div>
@@ -444,7 +472,7 @@ function Home({ toggleWishlist, isInWishlist, addToCart }) {
                 <hr className='border border-black' />
 
                 <div className="d-flex align-items-center py-3 gap-3">
-                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="rounded" width="64" height="64" />
+                  <img src="../src/assets/images/imgi_68_img-p2.jpeg" className="rounded" width="64" height="64" alt="" />
                   <div>
                     <div className="fw-medium">Premium Summer Top</div>
                     <div className="fw-semibold">$29.95</div>
