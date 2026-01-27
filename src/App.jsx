@@ -100,7 +100,7 @@ function App() {
 
         <Route path="/collection" element={<Collection />} />
 
-        <Route path="/newarrival" element={<Newarrival addToCart={addToCart} isInWishlist={isInWishlist} />} />
+        <Route path="/newarrival" element={<Newarrival addToCart={addToCart} toggleWishlist={toggleWishlist} isInWishlist={isInWishlist}/>}/>
 
         <Route path='/product/:id' element={<ProductDetail addToCart={addToCart} toggleWishlist={toggleWishlist} isInWishlist={isInWishlist} />} />
 

@@ -9,6 +9,8 @@ function Header({ wishlistCount, cart, setCart }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMagnifyOpen, setIsMagnifyOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,11 +72,7 @@ function Header({ wishlistCount, cart, setCart }) {
           <div className="col-lg-4 text-end">
             <div className="d-flex justify-content-end align-items-center gap-4">
               {/* CURRENCY */}
-              <div
-                className="position-relative"
-                onMouseEnter={() => setOpenCurrency(true)}
-                onMouseLeave={() => setOpenCurrency(false)}
-              >
+              <div className="position-relative" onClick={() => setOpenCurrency(prev => !prev)}>
                 <div className="d-flex align-items-center gap-2 cursor-pointer">
                   <img src="https://flagcdn.com/w20/us.png" alt="USD" />
                   <span>USD</span>
@@ -118,7 +116,7 @@ function Header({ wishlistCount, cart, setCart }) {
 
             <nav className="hidden lg:flex items-center gap-8 font-medium">
               <Link to="/" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Home <i className="fa-solid fa-angle-down"></i></Link>
-              <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Shop <i className="fa-solid fa-angle-down"></i></Link>
+              <Link to="/newarrival" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Shop <i className="fa-solid fa-angle-down"></i></Link>
               <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Products <i className="fa-solid fa-angle-down"></i></Link>
               <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Pages <i className="fa-solid fa-angle-down"></i></Link>
               <Link to="" className="flex items-center gap-1 text-black no-underline hover:border-b-2 hover:border-black hover:text-red-600">Blog <i className="fa-solid fa-angle-down"></i></Link>
@@ -152,23 +150,24 @@ function Header({ wishlistCount, cart, setCart }) {
                 </span>
               </button>
 
-              <button id="menuBtn" className="lg:hidden text-2xl">
+              <button className="lg:hidden text-2xl" onClick={() => setIsMobileMenuOpen(prev => !prev)}>
                 <img src="../src/assets/images/imgi_137_default.svg" alt="Menu" />
               </button>
             </div>
           </div>
         </div>
 
-        <div id="mobileMenu" className="lg:hidden hidden border-t">
+        {/* MOBILE MENU */}
+        <div className={`lg:hidden border-t ${isMobileMenuOpen ? "block" : "hidden"}`}>
           <div className="flex flex-col p-4 gap-4 font-medium">
-            <Link to="/">Home</Link>
-            <Link to="">Shop</Link>
-            <Link to="">Products</Link>
-            <Link to="">Pages</Link>
-            <Link to="">Blog</Link>
-            <Link to="">Buy now</Link>
+            <Link className="text-black no-underline" to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+            <Link className="text-black no-underline" to="/collection" onClick={() => setIsMobileMenuOpen(false)}>Shop</Link>
+            <Link className="text-black no-underline" to="/newarrival" onClick={() => setIsMobileMenuOpen(false)}>New Arrival</Link>
+            <Link className="text-black no-underline" to="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>Wishlist</Link>
+            <Link className="text-black no-underline" to="/shoppingcart" onClick={() => setIsMobileMenuOpen(false)}>Cart</Link>
           </div>
         </div>
+
       </header>
 
       {/* ================= CART SIDEBAR ================= */}
@@ -179,9 +178,8 @@ function Header({ wishlistCount, cart, setCart }) {
         ></div>
 
         <div
-          className={`absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-xl transform transition-transform duration-300 flex flex-col ${
-            isCartOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute right-0 top-0 h-full w-full sm:w-[420px] bg-white shadow-xl transform transition-transform duration-300 flex flex-col ${isCartOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           {/* Header */}
           <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
@@ -218,7 +216,7 @@ function Header({ wishlistCount, cart, setCart }) {
               cart.map((item) => (
                 <div key={item.id} className="flex gap-4 mb-4 border-b pb-4">
                   <img
-                    src={item.img1}
+                    src={item.img}
                     className="w-20 h-24 object-cover rounded flex-shrink-0"
                     alt={item.name}
                   />
@@ -285,7 +283,7 @@ function Header({ wishlistCount, cart, setCart }) {
             </p>
 
             <div className="flex gap-3">
-              <button 
+              <button
                 className="flex-1 border py-3 rounded hover:bg-gray-50"
                 onClick={() => setIsCartOpen(false)}
               >
